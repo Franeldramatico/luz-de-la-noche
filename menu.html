@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#021374" />
+  <meta name="description" content="Aranza & Franxito: Nightfall Edition. Una experiencia interactiva inspirada en los menús de Persona 3 Reload." />
+  <title>ARANZA & FRANXITO — NIGHTFALL EDITION</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600&display=swap" rel="stylesheet">
+  <style>
+    /*
+      NIGHTFALL EDITION — recreación HTML / CSS / JS
+      Escena de referencia: 1672 × 941 píxeles.
+      Los dibujos y el logotipo original se preservan en un recurso ilustrado.
+      Las tres opciones centrales son botones HTML independientes.
+      Para editar los textos de las ventanas, ve al objeto CONTENT al final.
+    */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    :root {
+      color-scheme: dark;
+      --bright: #56f7ff;
+      --bright-white: #e0ffff;
+      --acid-blue: #00a7ff;
+      --electric: #1238ff;
+      --deep: #00146f;
+      --pink: #f50973;
+      --yellow: #fcee68;
+      --scene-scale: 1;
+      --scene-left: 0px;
+      --scene-top: 0px;
+      font-synthesis: none;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
+    body { background: #030b50; font-family: Inter, 'Segoe UI', Arial, sans-serif; user-select: none; }
+    button { font-family: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 5px; }
+    .app { position: fixed; inset: 0; overflow: hidden; background: radial-gradient(ellipse at 70% 15%, #008be8 0%, #0033ac 52%, #040251 95%); }
+    .scene {
+      position: absolute; width: 1672px; height: 941px; left: var(--scene-left); top: var(--scene-top);
+      transform-origin: 0 0; transform: scale(var(--scene-scale)); isolation: isolate; overflow: hidden;
+      box-shadow: 0 0 0 2px #032783;
+    }
+    .backdrop, .pixel-original {
+      position: absolute; inset: 0; background-repeat: no-repeat;
+      background-position: center; background-size: 1672px 941px; pointer-events: none;
+    }
+    .backdrop { z-index: 0; background-image: url('nightfall_assets/escenario_sin_menu.webp'); }
+    .scene[data-arrival="pending"] .backdrop {visibility:hidden;}
+    .scene[data-arrival="pending"] .menu {visibility:hidden;}
+    .pixel-original { z-index: 5; background-image: url('nightfall_assets/referencia_original.webp'); opacity: 0; visibility: hidden; transition: opacity .3s ease,visibility .3s ease; }
+    .scene[data-reference="true"] .pixel-original { visibility: visible; opacity: 1; }
+
+    /* Movimiento deliberadamente sutil: la imagen base se mantiene fiel. */
+    .subtle-light {
+      position: absolute; pointer-events: none; z-index: 1; inset: 0; opacity: .35;
+      background: radial-gradient(ellipse 850px 110px at 72% -5%, #11f5ff22,transparent),
+                  linear-gradient(155deg, transparent 39%,#04cfff12 55%,transparent 64%);
+      animation: ocean-light 10s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+    @keyframes ocean-light { from { transform: translateX(-16px); opacity: .19; } to { transform: translateX(34px); opacity: .33; } }
+    .shard { position:absolute; z-index:2; pointer-events:none; width:0;height:0;
+      border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 19px solid #ff1d9d;
+      opacity:.45; filter: drop-shadow(0 0 9px #ff00a766); animation: float-shard var(--dur, 10s) ease-in-out infinite alternate;
+    }
+    .shard.s1 { left: 653px; top: 234px; transform:rotate(18deg) scale(.56); --dur:8s; }
+    .shard.s2 { left: 444px; top: 617px; transform:rotate(24deg) scale(.8); --dur:11s; }
+    .shard.s3 { left: 978px; top: 181px; transform:rotate(15deg) scale(.4); --dur:9s; }
+    @keyframes float-shard { to { translate: -12px -19px; opacity: .12; } }
+
+    /* Letras reales sin recortes de imagen ni restos de las opciones vecinas. */
+    .menu { position: absolute; z-index: 3; inset: 0; pointer-events: none; }
+    .mobile-menu-caption { display:none; }
+    .menu-item {
+      position: absolute; display: block; width: max-content; border: 0; padding: 0;
+      margin: 0; color: var(--bright); background: transparent; text-align: left;
+      font-family: 'Barlow Condensed', 'Impact', 'Arial Narrow', 'Arial Black', sans-serif;
+      font-weight: 900; font-style: italic; font-stretch: condensed; text-transform: uppercase;
+      letter-spacing: -1.8px; line-height: .84; white-space: nowrap;
+      text-shadow: 0 0 1px rgba(230,255,255,.35), 1px 2px 0 rgba(0,120,255,.10);
+      transform-origin: 12px 90%;
+      transition: color .18s ease, filter .18s ease, translate .19s cubic-bezier(.18,.89,.27,1.4);
+      pointer-events: auto; z-index: 2;
+    }
+    .menu-item .label-editable { display:block; padding:5px 13px 8px 4px; animation:menu-label-in .8s .12s cubic-bezier(.22,1,.36,1) backwards; }
+    .menu-item.reasons .label-editable {animation-delay:.22s;}
+    .menu-item.letter .label-editable {animation-delay:.32s;}
+    @keyframes menu-label-in {from {opacity:0;transform:translateX(20px);} to {opacity:1;transform:translateX(0);}}
+    .menu-item .label-editable span { display:block; color:transparent; background:linear-gradient(155deg,#f3ffff 0%,#98ffff 24%,#56f7ff 63%); background-clip:text; -webkit-background-clip:text; }
+    .menu-item.story .label-editable span:first-child { background-image:linear-gradient(145deg,#92ffff,#51efff); }
+    .scene[data-editable="true"] .menu-item .label-editable span { background:none; color:var(--bright-white); }
+    .menu-item::before {
+      content: ''; position: absolute; left: -28px; top: 48%; width: 18px; height: 19px;
+      opacity: 0; transform: translateX(-15px) translateY(-50%) rotate(-13deg);
+      background: var(--pink); clip-path: polygon(0 0, 100% 50%, 0 100%, 30% 50%);
+      transition: opacity .16s ease, transform .22s ease;
+    }
+    .menu-item::after {
+      content: ''; position: absolute; bottom: -14px; left: 5px; width: 98%; height: 3px;
+      background: linear-gradient(90deg,#fd127b 0%,#20f9ff 80%,transparent);
+      opacity: 0; transform: scaleX(.65); transform-origin: left;
+      transition: transform .24s ease,opacity .17s ease;
+    }
+    .menu-item:hover, .menu-item:focus-visible, .menu-item.is-active {
+      color: #edffff; filter: drop-shadow(0 0 14px #5df6ff6b); translate: 9px -2px;
+    }
+    .menu-item:hover::before, .menu-item:focus-visible::before, .menu-item.is-active::before {
+      opacity: 1; transform: translateX(0) translateY(-50%) rotate(-13deg);
+    }
+    .menu-item:hover::after, .menu-item:focus-visible::after { opacity: .85; transform: scaleX(1); }
+    .menu-item.story { left:718px; top:528px; font-size:78px; transform:rotate(-8deg) skewX(-7deg); }
+    .menu-item.story .label-editable span:nth-child(2) { margin-left: 5px; }
+    .menu-item.reasons { left:713px; top:667px; font-size:52px; transform:rotate(-6.5deg) skewX(-7deg); }
+    .menu-item.letter { left:743px; top:749px; font-size:71px; transform:rotate(-5deg) skewX(-7deg); }
+    .menu-item.letter .label-editable span:nth-child(2) { margin-left: -3px; }
+
+    /* Help bar: appears on pointer movement / Tab instead of spoiling the reference. */
+    .help-bar { position:absolute; z-index:4; right:28px; bottom:23px;
+      display:flex; gap:9px; align-items:center; opacity:0; transform:translateY(8px);
+      transition: opacity .23s, transform .23s; pointer-events:none;
+      color:#b6ecff; font: 700 12px Inter,'Segoe UI',sans-serif;
+      letter-spacing:.12em; text-transform:uppercase;
+    }
+    .help-bar kbd { display:inline-grid; place-items:center; height:28px; min-width:28px; padding:0 6px;
+      border:1px solid #73dcff6c; border-radius:4px; color:#e9ffff; background:#00207c9e;
+      font: inherit; }
+    .scene.show-help .help-bar, .scene:focus-within .help-bar { opacity:.9; transform:none; }
+
+    .reference-tag {
+      position: absolute; right: 32px; top: 27px; z-index: 8;
+      padding: 8px 13px; border-radius: 2px; background: #07145cdd;
+      color: #9cfbff; font-size: 13px; font-weight: 800; letter-spacing: .1em;
+      text-transform: uppercase; pointer-events:none;
+      opacity:0; transition:opacity .22s;
+    }
+    .scene[data-reference="true"] .reference-tag { opacity: 1; }
+
+    .overlay {
+      position: fixed; inset: 0; z-index: 20; display: grid; place-items: center;
+      padding: 30px; opacity:0; visibility:hidden; pointer-events:none;
+      transition: opacity .27s ease, visibility .27s;
+      background: linear-gradient(109deg,#030c5bee 0%,#03166ce9 53%,#00093ee8 100%);
+      backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+    }
+    .overlay.open { opacity:1; visibility:visible; pointer-events:auto; }
+    .overlay::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:repeating-linear-gradient(120deg,transparent 0,transparent 100px,#14bdfc07 101px,#14bdfc07 105px);
+    }
+    .overlay::after {
+      content:''; position:absolute; width:130vw; height:160px; top:8%; left:-15%; transform:rotate(-12deg);
+      background:linear-gradient(90deg,transparent,#00bafa16,transparent); pointer-events:none;
+    }
+    .dialog {
+      position:relative; width:min(980px,94vw); max-height:min(720px,89dvh); overflow:auto;
+      scrollbar-width:thin; scrollbar-color:#00dff6 #041052;
+      border: 1px solid #51f6ff55;
+      border-left: 7px solid var(--bright);
+      background: linear-gradient(132deg,#063cc5f5 0%,#082295f5 47%,#03145fee 100%);
+      box-shadow: 18px 23px 0 #01083d80, 0 22px 95px #010326a8;
+      clip-path:polygon(0 0, 97% 0,100% 8%,100% 100%,3% 100%,0 93%);
+      padding: clamp(30px,5vw,70px);
+      transform:translateY(24px) skewY(1.5deg);
+      transition: transform .35s cubic-bezier(.18,.82,.23,1);
+    }
+    .overlay.open .dialog { transform:none; }
+    .dialog::before {content:''; display:block; position:absolute; top:0; right:0; width:32%; height:8px; background:var(--pink); transform:skewX(-30deg);}
+    .dialog .eyebrow { margin:0 0 10px; text-transform:uppercase; letter-spacing:.26em;
+      font-family:Inter,sans-serif; font-size:12px; font-weight:800; color:#9eefff; }
+    .dialog h1 { margin:0 55px 20px 0; color:#e5ffff; font-family:'Barlow Condensed',Impact,sans-serif;
+      font-style:italic; font-weight:900; font-size:clamp(56px,8vw,110px); line-height:.78;
+      letter-spacing:-.015em; text-transform:uppercase; text-shadow:5px 5px 0 #00c7e4a4;
+      transform:skewX(-5deg); }
+    .dialog .lede { color:#d0f7ff; max-width:660px; font-size:clamp(16px,2vw,21px); line-height:1.75; }
+    .dialog .rule { height:3px; width:90px; background:var(--pink); margin:24px 0; }
+    .dialog .grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-top:28px; }
+    .dialog .tile { padding:22px; background:#00176a91; border-top:2px solid #23efff;
+      box-shadow: 6px 6px 0 #07115f; }
+    .dialog .tile small { color:#6ff9ff; font:900 28px 'Barlow Condensed',Impact,sans-serif; }
+    .dialog .tile h2 { margin:7px 0 8px; font-size:19px; color:#fff; }
+    .dialog .tile p { margin:0; font-size:14px; line-height:1.65; color:#b7e6fa; }
+    .dialog .reasons-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px 22px;
+      list-style:none; padding:0; margin:27px 0 0; }
+    .dialog .reasons-list li { display:flex; align-items:start; gap:14px; background:#002079a8; padding:12px; font-size:14px; line-height:1.5; color:#d4f9ff; }
+    .dialog .reasons-list b { font:900 25px 'Barlow Condensed',Impact,sans-serif; color:var(--bright); }
+    .dialog .letter-body {font-size:clamp(17px,2vw,21px);line-height:1.85;max-width:700px;color:#e9ffff;white-space:pre-line;}
+    .dialog .sample-note {color:#94c4e2; margin-top:26px;font-size:12px;line-height:1.5;}
+    .close-dialog { position:absolute; right:24px; top:23px; width:44px; height:44px; border:1px solid #aafcffbb;
+      color:#eaffff; background:#00267e; font-size:26px; line-height:1; clip-path: polygon(15% 0,100% 0,100% 85%,85% 100%,0 100%,0 15%);
+      transition:background .2s,transform .2s; }
+    .close-dialog:hover { background:var(--pink); transform:rotate(90deg); }
+    .footer-label { position:fixed; bottom:11px; left:16px; z-index:30; color:#b0e4ff;
+      opacity:0; font-size:10px; letter-spacing:.15em; pointer-events:none; }
+
+    @media (max-width:680px) {
+      .overlay { padding:10px; }
+      .dialog {padding:29px 22px 25px; width:96vw; max-height:87dvh;}
+      .dialog .reasons-list {grid-template-columns:1fr;}
+      .close-dialog {right:13px;top:12px; width:36px;height:36px;}
+      .dialog h1 {font-size:58px;margin-right:36px;}
+      .dialog .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main class="app" aria-label="Pantalla principal Aranza y Franxito Nightfall Edition">
+  <section id="scene" class="scene" data-reference="false" data-editable="false" data-arrival="pending" aria-label="Portada ilustrada y menú de navegación">
+    <div class="backdrop" aria-hidden="true"></div>
+    <div class="living-art" aria-hidden="true"></div>
+    <div class="subtle-light" aria-hidden="true"></div>
+    <div class="shard s1" aria-hidden="true"></div>
+    <div class="shard s2" aria-hidden="true"></div>
+    <div class="shard s3" aria-hidden="true"></div>
+
+    <nav class="menu" aria-label="Menú principal">
+      <span class="mobile-menu-caption" aria-hidden="true">NUESTRO PEQUEÑO UNIVERSO <span>ELIGE UN RECUERDO</span></span>
+      <button class="menu-item story" type="button" data-page="historia" aria-label="Nuestra historia">
+        <span class="label-editable"><span>NUESTRA</span><span>HISTORIA</span></span>
+      </button>
+      <button class="menu-item reasons" type="button" data-page="razones" aria-label="Lo que me gusta">
+        <span class="label-editable"><span>LO QUE ME GUSTA</span></span>
+      </button>
+      <button class="menu-item letter" type="button" data-page="carta" aria-label="Carta especial">
+        <span class="label-editable"><span>CARTA</span><span>ESPECIAL</span></span>
+      </button>
+    </nav>
+    <div class="pixel-original" aria-hidden="true"></div>
+    <div class="reference-tag">Referencia original · pulsa O para volver</div>
+    <div class="help-bar" aria-hidden="true">
+      <kbd>↑</kbd><kbd>↓</kbd> Elegir
+      <kbd>ENTER</kbd> Abrir
+      <kbd>O</kbd> Original <kbd>E</kbd> Color de texto
+    </div>
+  </section>
+  <div class="mobile-menu-title" aria-hidden="true">ARANZA & FRANXITO<span>NIGHTFALL EDITION</span></div>
+</main>
+
+<svg class="ocean-atmosphere" aria-hidden="true" fill="none" preserveAspectRatio="none">
+  <defs>
+    <radialGradient id="bubble-pearl" cx=".32" cy=".28" r=".75"><stop stop-color="#e5ffff" stop-opacity=".24"/><stop offset=".35" stop-color="#c4faff" stop-opacity=".025"/><stop offset=".77" stop-color="#36d0f5" stop-opacity=".015"/><stop offset="1" stop-color="#94f5ff" stop-opacity=".3"/></radialGradient>
+    <linearGradient id="ocean-shaft" x2=".3" y2="1"><stop stop-color="#caffff" stop-opacity=".42"/><stop offset="1" stop-color="#6bdfff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="ocean-edge" x2="0" y2="1"><stop stop-color="#aaffff" stop-opacity=".3"/><stop offset=".55" stop-color="#78e9ff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+    <g class="ocean-ray"><path d="M600-50h70L420 1050H200Z" fill="url(#ocean-shaft)"/><path d="M720-50h35L700 1050H590Z" fill="url(#ocean-shaft)"/></g>
+    <g class="ocean-ray second"><path d="M900-50h70L920 1050H770Z" fill="url(#ocean-shaft)"/></g>
+    <g class="ocean-caustic" stroke="#adffff" stroke-width="1" opacity=".2"><path d="M0 125Q160 65 260 115T540 85T850 130T1100 80M-50 190Q120 120 280 170T560 140T860 200T1100 150M30 85Q240 30 400 75T780 50T1100 95"/></g>
+    <g class="ocean-current" stroke="#90f8ff" stroke-width=".8"><path d="M650 600C780 545 935 580 1020 520M720 622C840 579 925 620 1040 568M790 657C920 610 1000 655 1100 595"/></g>
+    <g class="ocean-current second" stroke="#c2eaff" stroke-width=".7"><path d="M440 870C610 820 780 900 1050 810M480 900C670 850 810 930 1080 855M720 955C860 900 1020 970 1120 920"/></g>
+    <path fill="url(#ocean-edge)" d="M0 0H1000V1000H0Z"/>
+  </svg>
+  <g class="ocean-dust"></g>
+  <g class="ocean-bubbles"></g>
+  <g class="ocean-details"></g>
+  <g class="ocean-interactions"></g>
+</svg>
+
+<div id="overlay" class="overlay" role="presentation" aria-hidden="true">
+  <article id="dialog" class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" tabindex="-1">
+    <header class="section-topline">
+      <button class="close-dialog" type="button" id="closeDialog" aria-label="Cerrar ventana"><span aria-hidden="true">←</span> VOLVER AL MENÚ</button>
+      <nav class="section-tabs" aria-label="Secciones de nuestra historia">
+        <button type="button" data-section="historia">01 <span>HISTORIA</span></button>
+        <button type="button" data-section="razones">02 <span>ME GUSTA</span></button>
+        <button type="button" data-section="carta">03 <span>CARTA</span></button>
+        <span class="section-tab-indicator" aria-hidden="true"></span>
+      </nav>
+    </header>
+    <div class="section-scene">
+    <div class="section-water" aria-hidden="true"></div>
+    <div class="section-water-shade" aria-hidden="true"></div>
+    <div class="section-watermark" aria-hidden="true">01</div>
+    <svg class="section-ornament" viewBox="0 0 1000 1000" aria-hidden="true" fill="none">
+      <g class="ornament-history" stroke="currentColor"><circle cx="330" cy="510" r="275"/><circle cx="330" cy="510" r="235" stroke-dasharray="2 15"/><path d="M100 750 220 620 340 530 430 345 610 240"/><circle cx="220" cy="620" r="7"/><circle cx="340" cy="530" r="7"/><circle cx="430" cy="345" r="7"/></g>
+      <g class="ornament-reasons" stroke="currentColor"><path d="M740 760C680 680 460 535 460 370 460 225 650 180 740 300 830 180 1020 225 1020 370 1020 535 800 680 740 760Z"/><circle cx="740" cy="460" r="310" stroke-dasharray="3 12"/><path d="m740 110 350 350-350 350-350-350Z"/></g>
+      <g class="ornament-letter" stroke="currentColor"><ellipse cx="290" cy="510" rx="250" ry="330" transform="rotate(-24 290 510)"/><ellipse cx="290" cy="510" rx="220" ry="300" transform="rotate(24 290 510)" stroke-dasharray="2 14"/><path d="M130 230h15m-7-7v14M440 690h18m-9-9v18M230 820h12m-6-6v12"/></g>
+    </svg>
+    <div class="section-character" aria-hidden="true"></div>
+    <div class="section-scroll" tabindex="0" aria-label="Contenido de la sección">
+      <div class="section-text-block">
+        <p id="dialog-kicker" class="eyebrow">Nightfall Edition // Archivo</p>
+        <h1 id="dialog-title"></h1>
+        <div class="rule"></div>
+        <div id="dialog-content"></div>
+      </div>
+    </div>
+    <footer class="section-footer"><span>ARANZA & FRANXITO <i>/</i> OUR OWN UNIVERSE</span><span class="section-live-label">MEMORIES THAT NEVER FADE</span></footer>
+    </div>
+    <div class="section-transition-sheet" aria-hidden="true"></div>
+  </article>
+</div>
+
+  <script>
+  'use strict';
+  const WIDTH = 1672;
+  const HEIGHT = 941;
+  const scene = document.getElementById('scene');
+  const overlay = document.getElementById('overlay');
+  const dialog = document.getElementById('dialog');
+  const titleNode = document.getElementById('dialog-title');
+  const contentNode = document.getElementById('dialog-content');
+  const kickerNode = document.getElementById('dialog-kicker');
+  const buttons = [...document.querySelectorAll('.menu-item')];
+
+
+  // Permite volver a la portada desde el menú incrustado, sin alterar sus paneles.
+  if (window.parent !== window) document.addEventListener('keydown', (event) => {
+    const panelOpen = overlay.classList.contains('open');
+    if (event.key === 'Escape' && !panelOpen && scene.dataset.reference !== 'true') {
+      window.parent.postMessage('nightfall:close', location.origin);
+    }
+    if (event.key === 'Tab' && !panelOpen && ((event.shiftKey && document.activeElement === buttons[0]) || (!event.shiftKey && document.activeElement === buttons[buttons.length - 1]))) {
+      event.preventDefault(); window.parent.postMessage('nightfall:focus-close', location.origin);
+    }
+  }, true);
+
+  // ====== CONTENIDO EDITABLE ======
+  // Nuestra historia, de Chile a México.
+  const CONTENT = {
+    historia: {
+      title: 'NUESTRA HISTORIA',
+      kicker: 'Archivo 001 · Todo comenzó aquí',
+      introduction: 'Mi amor hermosa, más de un año de nosotros. De Chile a México, siempre juntitos, aunque a veces nos cueste encontrar el camino. El amor nunca se irá :3',
+      timeline: [
+        { number: '01', title: 'Más de un año juntitos :3', text: 'Mi amor hermosa, nuestra relación ya lleva más de un año. Hemos pasado por muchas cositas, unas preciosas y otras difíciles, pero por muchos problemas que haya siempre salimos adelante. Me quedo con todo lo bonito que hemos vivido y con nosotros, siempre juntitos.' },
+        { number: '02', title: 'Lo nuestro sigue aquí', text: 'Sé que ahora nuestra relación está rara porque volvimos a ser amigos. No quiero hacer como si nada hubiera cambiado, pero tampoco olvidar lo que sentimos: nos seguimos amando como nunca. Aunque ahora estemos aprendiendo a estar de otra manera, ese amor sigue aquí, mi niña hermosa.' },
+        { number: '03', title: 'De Chile a México, contigo', text: 'Yo desde Chile y tú desde México, con tantos kilómetros entre nosotros y aun así tan cerquita del corazón. La distancia no se lleva todo lo que siento por ti. Sea como sea el camino, quiero que recuerdes esto: eres muy especial para mí y el amor nunca se irá :3' }
+      ]
+    },
+    razones: {
+      title: 'LO QUE ME GUSTA',
+      kicker: 'Archivo 002 · Diez cosas que me gustan de ti',
+      introduction: 'Diez espacios para escribir lo que hace única a una persona. Puedes cambiar cada frase directamente en el código.',
+      items: [
+        'Porque conviertes lo cotidiano en algo especial.',
+        'Porque las mejores conversaciones no necesitan reloj.',
+        'Porque incluso los días grises tienen momentos bonitos.',
+        'Porque las pequeñas cosas también importan.',
+        'Porque hay recuerdos que siempre nos hacen sonreír.',
+        'Porque cada aventura tiene algo que enseñarnos.',
+        'Porque una sonrisa puede cambiarlo todo.',
+        'Porque compartir el camino lo hace distinto.',
+        'Porque aún quedan muchas historias por contar.',
+        'Porque hay personas que dejan una huella única.'
+      ]
+    },
+    carta: {
+      title: 'CARTA ESPECIAL',
+      kicker: 'Archivo 003 · Solo para ti',
+      introduction: 'Una carta para guardar palabras importantes.',
+      body: 'Mi amor hermosa,\n\nMás de un año de nosotros, de cariño y de tantas cosas que hemos superado juntitos. Sé que ahora todo está un poquito raro y que volvimos a ser amigos, pero lo que siento por ti no se borra por cambiarle el nombre a lo nuestro.\n\nNos seguimos amando como nunca, y yo guardo con muchísimo cariño todo lo que hemos vivido. Por muchos problemas que haya, siempre hemos encontrado una forma de salir adelante.\n\nDesde Chile hasta México te mando todo mi amor. Gracias por seguir siendo tan especial para mí, mi niña hermosa. El amor nunca se irá :3\n\nCon todo mi cariño,\nFranxito'
+    }
+  };
+
+  // Escritorio: referencia original. Pantallas compactas: arte y controles independientes.
+  function fitStage() {
+    const w = window.innerWidth, h = window.innerHeight;
+    const compact = w <= 1024 || (matchMedia('(pointer: coarse)').matches && h <= 600);
+    const landscape = compact && w / h >= 1.25;
+    const clearance = compact && !landscape ? Number.parseFloat(document.documentElement.style.getPropertyValue('--soundtrack-clearance')) || 0 : 0;
+    const availableHeight = Math.max(260, h - clearance);
+    scene.style.setProperty('--menu-clearance', `${clearance}px`);
+    scene.classList.toggle('is-compact', compact);
+    scene.classList.toggle('is-landscape', landscape);
+    document.documentElement.classList.toggle('compact-menu', compact);
+    const scale = compact ? 1 : Math.max(w / WIDTH, h / HEIGHT);
+    let x = (w - WIDTH * scale) / 2;
+    let y = (h - HEIGHT * scale) / 2;
+    if (compact) {
+      x = 0; y = 0;
+      const row = landscape ? Math.max(48, Math.min(68, h * .15)) : Math.max(64, Math.min(84, h * .09));
+      let artScale, artX, artY;
+      if (landscape) {
+        artScale = Math.min((h - 20) / HEIGHT, w * .49 / 740);
+        artX = (w * .49 - 740 * artScale) / 2;
+        artY = h - HEIGHT * artScale;
+      } else {
+        // Keep the desktop relationship: portrait on the left, choices on the
+        // right. Anchor the face, not the centre of the full landscape image.
+        artY = 82;
+        artScale = Math.max(.28, Math.min(.72, (availableHeight - artY) / HEIGHT));
+        artX = w * .22 - 310 * artScale;
+      }
+      scene.style.setProperty('--art-scale', artScale.toFixed(5));
+      scene.style.setProperty('--art-x', artX.toFixed(2) + 'px');
+      scene.style.setProperty('--art-y', artY.toFixed(2) + 'px');
+      scene.style.setProperty('--menu-row', row.toFixed(2) + 'px');
+    }
+    document.documentElement.style.setProperty('--scene-scale', scale.toFixed(6));
+    document.documentElement.style.setProperty('--scene-left', x.toFixed(2) + 'px');
+    document.documentElement.style.setProperty('--scene-top', y.toFixed(2) + 'px');
+    // Keep the artwork edge-to-edge. Only the navigation adapts when cover
+    // scaling crops the scene: anchor it below the logo and fit its actual bounds.
+    const menu = scene.querySelector('.menu');
+    menu.style.transform = 'none';
+    if (!compact) {
+      const anchorY = y + 528 * scale;
+      const bottom = Math.max(...buttons.map(button => button.getBoundingClientRect().bottom));
+      const fit = Math.min(1, Math.max(.4, (h - 28 - anchorY) / (bottom - anchorY)));
+      menu.style.transformOrigin = '718px 528px';
+      menu.style.transform = `scale(${fit})`;
+    }
+  }
+  let fitFrame = 0;
+  const scheduleFit = () => {
+    if (fitFrame) return;
+    fitFrame = requestAnimationFrame(() => { fitFrame = 0; fitStage(); });
+  };
+  addEventListener('resize', scheduleFit, {passive:true});
+  document.fonts.ready.then(scheduleFit);
+  // Vite loads the scene typography asynchronously. Refit after its real
+  // button dimensions arrive, not just after the initial fallback font.
+  const menuSizes = new ResizeObserver(scheduleFit);
+  buttons.forEach(button => menuSizes.observe(button));
+  addEventListener('orientationchange', scheduleFit, {passive:true});
+  window.visualViewport?.addEventListener('resize', scheduleFit, {passive:true});
+  addEventListener('message', event => {
+    if (event.source !== window.parent || event.origin !== location.origin || event.data?.type !== 'nightfall:layout') return;
+    const height = event.data.soundtrackHeight;
+    if (typeof height !== 'number' || !Number.isFinite(height)) return;
+    document.documentElement.style.setProperty('--soundtrack-clearance', `${Math.max(0, Math.min(innerHeight * .65, height))}px`);
+    scheduleFit();
+  });
+  fitStage();
+
+  let selectedIndex = -1;
+  let previousFocus = null;
+  let audioContext;
+  function playNote(frequency = 700) {
+    // Sonido opcional de interfaz, solo después de interacción explícita.
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      audioContext ||= new AudioCtx();
+      const osc = audioContext.createOscillator(), gain = audioContext.createGain();
+      osc.type = 'sine'; osc.frequency.setValueAtTime(frequency, audioContext.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(frequency * .72, audioContext.currentTime + .08);
+      gain.gain.setValueAtTime(.0001, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(.028, audioContext.currentTime + .008);
+      gain.gain.exponentialRampToValueAtTime(.0001, audioContext.currentTime + .11);
+      osc.connect(gain).connect(audioContext.destination);
+      osc.start(); osc.stop(audioContext.currentTime + .12);
+    } catch (_) { /* Permisos o salida de audio no disponible. */ }
+  }
+  function select(index, focus = false) {
+    selectedIndex = (index + buttons.length) % buttons.length;
+    buttons.forEach((el,i) => el.classList.toggle('is-active', i === selectedIndex));
+    if (focus) buttons[selectedIndex].focus({preventScroll:true});
+  }
+  function openPanel(key) {
+    const page = CONTENT[key];
+    if (!page) return;
+    document.dispatchEvent(new Event('nightfall:skip-arrival'));
+    playNote(890);
+    const panelWasOpen = overlay.classList.contains('open');
+    if (!panelWasOpen) previousFocus = document.activeElement;
+    const sectionDetail = { key, page, handled: false };
+    document.dispatchEvent(new CustomEvent('nightfall:section-open', { detail: sectionDetail }));
+    if (!sectionDetail.handled) {
+      kickerNode.textContent = page.kicker;
+      titleNode.textContent = page.title;
+      let markup = `<p class="lede">${escapeHtml(page.introduction)}</p>`;
+      if (page.timeline) markup += `<div class="grid">${page.timeline.map(item => `<div class="tile"><small>${escapeHtml(item.number)}</small><h2>${escapeHtml(item.title)}</h2><p>${escapeHtml(item.text)}</p></div>`).join('')}</div>`;
+      if (page.items) markup += `<ol class="reasons-list">${page.items.map((txt,i) => `<li><b>${String(i+1).padStart(2,'0')}</b><span>${escapeHtml(txt)}</span></li>`).join('')}</ol>`;
+      if (page.body) markup += `<p class="letter-body">${escapeHtml(page.body)}</p>`;
+      contentNode.innerHTML = markup;
+    }
+    document.querySelector('.app').inert = true;
+    overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false');
+    if (window.parent !== window) window.parent.postMessage('nightfall:panel-open', location.origin);
+    const panelFocus = panelWasOpen ? overlay.querySelector(`[data-section="${key}"]`) : document.getElementById('closeDialog');
+    panelFocus?.focus({preventScroll:true});
+  }
+  function escapeHtml(text) { return String(text).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function closePanel() {
+    if (!overlay.classList.contains('open') || overlay.dataset.closing === 'true') return;
+    overlay.dataset.closing = 'true';
+    const finish = () => {
+      overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true');
+      delete overlay.dataset.closing;
+      document.querySelector('.app').inert = false;
+      if (window.parent !== window) window.parent.postMessage('nightfall:panel-close', location.origin);
+      document.dispatchEvent(new Event('nightfall:section-closed'));
+      playNote(520);
+      previousFocus?.focus?.({preventScroll:true});
+    };
+    const detail = { finish, handled: false };
+    document.dispatchEvent(new CustomEvent('nightfall:section-exit', { detail }));
+    if (!detail.handled) finish();
+  }
+  document.addEventListener('nightfall:navigate-section', event => {
+    if (overlay.dataset.closing !== 'true') openPanel(event.detail.key);
+  });
+  buttons.forEach((button,i)=> {
+    button.addEventListener('click',()=>openPanel(button.dataset.page));
+    button.addEventListener('mouseenter',()=> { if(selectedIndex !== i) playNote(570 + i*70); select(i); });
+    button.addEventListener('focus',()=>select(i));
+  });
+  document.getElementById('closeDialog').addEventListener('click',closePanel);
+  overlay.addEventListener('click',(e)=> { if (e.target === overlay) closePanel(); });
+  document.addEventListener('keydown',(e)=> {
+    if (e.key === 'Escape') { closePanel(); if(scene.dataset.reference==='true') scene.dataset.reference='false'; return; }
+    if (overlay.classList.contains('open')) {
+      if(e.key === 'Tab') {
+        const focusable = [...dialog.querySelectorAll('button:not([disabled]),a[href],[tabindex="0"],iframe')].filter(element => element.getClientRects().length);
+        const first=focusable[0], last=focusable[focusable.length-1];
+        if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+      }
+      return;
+    }
+    if (e.key.toLowerCase()==='o') { scene.dataset.reference = scene.dataset.reference==='true'?'false':'true'; playNote(710); return; }
+    if (e.key.toLowerCase()==='e') { scene.dataset.editable=scene.dataset.editable==='true'?'false':'true'; playNote(800); return; }
+    if (scene.dataset.reference === 'true') return;
+    if(e.key==='ArrowDown'||e.key==='ArrowUp') { e.preventDefault(); select(selectedIndex + (e.key==='ArrowDown'?1:-1),true);playNote(620); }
+    else if(e.key==='Enter' && selectedIndex!==-1 && !e.repeat) { if(document.activeElement!==buttons[selectedIndex]) {e.preventDefault();openPanel(buttons[selectedIndex].dataset.page);} }
+    else if(['1','2','3'].includes(e.key)) { e.preventDefault();select(Number(e.key)-1,true);openPanel(buttons[selectedIndex].dataset.page); }
+    else if(e.key.toLowerCase()==='h') scene.classList.toggle('show-help');
+  });
+  let helpTimeout;
+  scene.addEventListener('mousemove', () => {
+    scene.classList.add('show-help'); clearTimeout(helpTimeout);
+    helpTimeout=setTimeout(()=>scene.classList.remove('show-help'),1800);
+  },{passive:true});
+  // El archivo funciona sin conexión: los recursos ilustrados están incrustados.
+</script>
+<script type="module" src="/src/menu-scene.js"></script>
+</body>
+</html>

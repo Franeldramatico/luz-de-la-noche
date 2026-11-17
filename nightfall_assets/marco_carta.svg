@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
+  <style>.letter-orbit-glint{animation:orbit-glint 5s ease-in-out infinite}.letter-orbit-glint.secondary{animation-delay:-2.5s}@keyframes orbit-glint{0%,100%{opacity:.15}50%{opacity:.85}}</style>
+  <g stroke="#efd2ae" stroke-width="1" opacity=".3"><ellipse cx="300" cy="200" rx="277" ry="150" transform="rotate(-13 300 200)"/><ellipse cx="300" cy="200" rx="265" ry="143" transform="rotate(13 300 200)" stroke-dasharray="1 13"/></g>
+  <g class="letter-orbit-glint" fill="#ffe7ca"><path d="m81 110 2 10 10 2-10 2-2 10-2-10-10-2 10-2Z"/><circle cx="513" cy="267" r="2"/></g>
+  <g class="letter-orbit-glint secondary" fill="#d2eaff"><path d="m514 119 2 8 8 2-8 2-2 8-2-8-8-2 8-2Z"/><circle cx="127" cy="294" r="1.6"/></g>
+  <path d="M211 43h178M211 357h178" stroke="#efd2ae" stroke-opacity=".18"/>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1536" viewBox="0 0 1024 1536" overflow="visible">
+  <defs>
+    <linearGradient id="p4-crown" x2=".7" y2="1"><stop stop-color="#161421"/><stop offset=".6" stop-color="#0b0b13"/><stop offset="1" stop-color="#171422"/></linearGradient>
+    <linearGradient id="p4-shoe" x1=".1" y1=".2" x2=".9" y2="1"><stop stop-color="#0a0a13"/><stop offset=".35" stop-color="#171522"/><stop offset=".52" stop-color="#080a11"/><stop offset=".8" stop-color="#282132"/><stop offset="1" stop-color="#0b0b16"/></linearGradient>
+    <linearGradient id="p4-sole" x2="0" y2="1"><stop stop-color="#171620"/><stop offset=".6" stop-color="#0b0c15"/><stop offset="1" stop-color="#242031"/></linearGradient>
+    <linearGradient id="p4-gloss"><stop stop-color="#e3dded" stop-opacity="0"/><stop offset=".5" stop-color="#d9e4f5" stop-opacity=".65"/><stop offset="1" stop-color="#e3dded" stop-opacity="0"/></linearGradient>
+    <linearGradient id="p4-strand" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#282344" stop-opacity="0"/><stop offset=".3" stop-color="#294ab1" stop-opacity=".55"/><stop offset=".65" stop-color="#74406f" stop-opacity=".38"/><stop offset="1" stop-color="#151729" stop-opacity="0"/></linearGradient>
+  </defs>
+  <g class="completion-crown">
+    <path d="M219 39C241-18 286-57 336-66 379-86 420-69 448-54 486-49 510-22 523 30L487 47 244 56Z" fill="url(#p4-crown)" stroke="#0a0b13" stroke-width="2"/>
+    <path d="M238 15C268-34 308-50 365-66 325-40 296-17 280 19M343 10C354-26 372-54 389-70M391-66C446-48 471-16 489 19" fill="none" stroke="#252135" stroke-width="4"/>
+    <path d="M248-1 266-24 285-33 275-15 260-9ZM442-46 466-31 485-6 465-17Z" fill="#1554cb" opacity=".65"/>
+    <path d="M229 18C251-30 321-84 378-74M384-77C449-72 489-39 509 0" fill="none" stroke="#2c3591" stroke-width="1.3" opacity=".6"/>
+  </g>
+  <!-- Mechones finos del contorno: las raíces quedan dentro de la silueta. -->
+  <g class="completion-fine-strands" fill="none" stroke="url(#p4-strand)" stroke-width="1.3" stroke-linecap="round">
+    <path d="M175 192C132 230 117 283 131 315S157 354 140 388"/>
+    <path d="M92 354C36 381 28 433 61 460S111 475 119 452"/>
+    <path d="M61 473C5 470-14 523 12 564S69 613 97 592"/>
+    <path d="M52 669C-3 688-20 746 10 781S72 804 91 780"/>
+    <path d="M71 856C17 864-9 919 17 962S77 1005 103 978"/>
+    <path d="M183 1052C126 1049 93 1101 120 1138S175 1170 201 1148"/>
+    <path d="M292 1193C237 1192 197 1237 218 1272S278 1300 299 1277"/>
+    <path d="M662 113C705 76 740 109 727 143S687 181 681 164"/>
+    <path d="M807 239C860 221 897 256 883 291S844 329 829 314"/>
+    <path d="M883 366C935 349 965 392 945 429S913 465 890 454"/>
+    <path d="M939 498C987 478 1018 520 1004 555S970 591 951 578"/>
+    <path d="M941 682C987 668 1004 710 980 739S939 770 926 750"/>
+  </g>
+  <g class="completion-shoe">
+    <!-- La puntera continúa los bordes reales x605..724 en la fila 1535. -->
+    <path d="M607 1505C631 1500 700 1505 728 1503L724 1536C723 1558 711 1575 691 1582 665 1592 628 1589 611 1577 600 1566 600 1550 605 1533Z" fill="url(#p4-shoe)" stroke="#080a12" stroke-width="2"/>
+    <path d="M604 1556C627 1578 687 1582 720 1554L716 1575C700 1594 640 1608 610 1586 603 1579 600 1566 604 1556Z" fill="url(#p4-sole)" stroke="#080a12" stroke-width="2"/>
+    <path d="M609 1556C636 1574 687 1575 713 1557M616 1582C642 1595 684 1591 707 1579" fill="none" stroke="#464052" stroke-width="1.8" opacity=".7"/>
+    <path d="M619 1529C620 1548 640 1559 658 1561M683 1523C695 1532 701 1540 700 1548" fill="none" stroke="url(#p4-gloss)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M717 1528 724 1540 717 1559 712 1548Z" fill="#262778" opacity=".65"/>
+  </g>
+  <g class="completion-seams" fill="none" stroke-linecap="round">
+    <path d="M254 17Q285-27 326-42M354 10Q363-30 382-52M420-43Q464-18 478 20" stroke="#242032" stroke-width="2"/>
+    <path d="M620 1511Q624 1539 650 1550M690 1515Q701 1532 702 1545" stroke="url(#p4-gloss)" stroke-width="2"/>
+  </g>
+</svg>

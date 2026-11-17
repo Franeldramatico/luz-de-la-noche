@@ -1,0 +1,46 @@
+/* All three compositions share one transition surface; navigation stays put. */
+.section-scene { position: absolute; inset: 0; z-index: 0; isolation: isolate; }
+:root #overlay .section-topline { background: linear-gradient(110deg, #061731f7, #09234aef); border-bottom: 1px solid #a4ecf52b; box-shadow: 0 8px 35px #000d2a18; }
+:root #overlay .section-tabs { position: relative; isolation: isolate; padding: 5px; gap: 3px; border: 1px solid #c2faff24; border-radius: 50px; background: #06152a80; }
+:root #overlay .section-tabs > button { position: relative; z-index: 1; border: 0; border-radius: 30px; min-height: 40px; padding: 9px 19px; color: #a6c9df; transition: color .25s, background .25s; }
+:root #overlay .section-tabs > button:hover { color: #fff; background: #b5faff09; }
+:root #overlay .section-tabs > button[aria-current=page] { color: #ecffff; background: transparent; }
+.section-tab-indicator { position: absolute; left: 0; top: 5px; bottom: 5px; z-index: 0; border: 1px solid #afffff40; border-radius: 30px; background: linear-gradient(125deg, #65c9df24, #99c8ff13); box-shadow: 0 2px 10px #000d3a20, inset 0 1px 0 #baffff0d; pointer-events: none; opacity: 0; }
+.has-selection .section-tab-indicator { opacity: 1; transition: transform .45s var(--ease-water), width .45s var(--ease-water), opacity .2s; }
+:root #overlay.reload-section .close-dialog { border-radius: 9px; clip-path: none; border-color: #afecf533; background: #bddfff08; transition: background .25s, border-color .25s; }
+:root #overlay.reload-section .close-dialog:hover { translate: none; background: #bbecff14; border-color: #afecf580; }
+:root #overlay.reload-section .close-dialog > span { transition: translate .3s var(--ease-water); }
+:root #overlay.reload-section .close-dialog:hover > span { translate: -3px 0; }
+:root #overlay .section-scroll { scroll-behavior: auto; }
+:root .section-character .section-model-float { animation-timing-function: ease-in-out; }
+:root #overlay .history-chapters { gap: 10px; }
+:root #overlay .history-chapters > button { border: 1px solid #adefff26; border-radius: 11px; clip-path: none; background: linear-gradient(110deg, #0a2b60ed, #0a2154bd); transition: translate .35s var(--ease-water), background .25s, color .25s, border-color .25s; }
+:root #overlay .history-chapters > button:hover { border-color: #a2f6ff78; }
+:root #overlay .history-chapters > button[aria-pressed=true] { background: linear-gradient(110deg, #e6ffff, #a9e8f2); color: #082346; border-color: #d6fbff; translate: 5px 0; box-shadow: 0 4px 22px #82e7ff0b; }
+.history-chapters > button > svg { transition: translate .35s var(--ease-water); }
+.history-chapters > button[aria-pressed=true] > svg { translate: 2px 0; }
+:root #overlay .history-memory { border-radius: 15px; clip-path: none; border: 1px solid #adf2ff30; border-top-color: #a4eaf267; background: linear-gradient(125deg, #092950f2, #071e42ed); box-shadow: 0 12px 35px #00112c12; }
+:root #overlay .memory-kicker { font-size: 8px; letter-spacing: .15em; color: #a5ecf4; }
+:root #overlay .section-edit-note { font-size: 9px; line-height: 1.7; color: #9ebfd5; }
+:root #overlay .section-letter-paper { border-radius: 11px; }
+.letter-envelope { transition: transform .65s var(--ease-water), box-shadow .4s; }
+.letter-envelope:hover { box-shadow: 0 28px 80px #000e3a85, 0 0 50px #f8dfba16; }
+.section-footer { font-size: 8px; }
+
+@media (min-width: 1025px) {
+  :root #overlay #dialog-title { font-size: clamp(76px, 8.5vw, 138px); line-height: .95; }
+  :root #overlay .section-intro { font-size: 13px; line-height: 1.85; }
+  :root #overlay .history-memory p { font-size: 13px; }
+}
+@media (max-width: 1024px) and (orientation: portrait) {
+  :root #overlay .section-topline { gap: 6px; padding: max(9px, env(safe-area-inset-top)) 18px 9px; }
+  :root #overlay .section-tabs { gap: 2px; padding: 4px; }
+  :root #overlay .section-tabs > button { min-height: 38px; padding: 7px 5px; }
+  .section-tab-indicator { top: 4px; bottom: 4px; }
+  :root #overlay .section-scroll { padding-top: calc(var(--gustos-top, 116px) + 24px); }
+  :root #overlay .section-intro { color: #c0d9e8; }
+}
+@media (max-width: 1024px) and (orientation: landscape) {
+  :root #overlay .section-tabs > button { padding: 6px 12px; min-height: 34px; }
+  :root #overlay .section-tabs { min-width: 245px; }
+}

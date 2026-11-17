@@ -1,0 +1,35 @@
+/* Un cierre breve sobre el eje real de cada ojo, no una cortina rectangular. */
+#overlay .pose-eye-aperture{transform-origin:0 0;transform-box:view-box;animation:eye-aperture 5.8s ease-in-out infinite}
+#overlay .pose-eye-lash{opacity:0;animation:eye-lash 5.8s ease-in-out infinite}
+#overlay .pose-eye>.pose-eye-socket{filter:blur(1px)}
+#overlay [data-pose="3"] .pose-eye-aperture,#overlay [data-pose="3"] .pose-eye-lash{animation-duration:6.2s}
+#overlay [data-pose="4"] .pose-eye-aperture,#overlay [data-pose="4"] .pose-eye-lash{animation-duration:5.4s}
+@keyframes eye-aperture{0%,63%,69%,100%{transform:scaleY(1);opacity:1}64.2%,65.2%{transform:scaleY(.035);opacity:0}}
+@keyframes eye-lash{0%,63.5%,69%,100%{opacity:0}64.2%,65.2%{opacity:1}}
+#overlay [data-pose="3"] .pose-hair-left,#overlay [data-pose="4"] .pose-hair-left{animation:hair-underwater-left 10s -2s ease-in-out infinite;transform-box:view-box;transform-origin:240px 250px}
+#overlay [data-pose="3"] .pose-hair-right,#overlay [data-pose="4"] .pose-hair-right{animation:hair-underwater-right 12s -5s ease-in-out infinite;transform-box:view-box;transform-origin:1050px 180px}
+#overlay [data-pose="3"] .pose-hair-left{transform-origin:470px 170px}
+#overlay [data-pose="4"] .pose-hair-right{transform-origin:830px 240px;animation-duration:10.6s}
+@keyframes hair-underwater-left{0%,100%{transform:translate(0,0) rotate(0deg)}35%{transform:translate(-3px,-4px) rotate(-.3deg)}70%{transform:translate(1px,-2px) rotate(.12deg)}}
+@keyframes hair-underwater-right{0%,100%{transform:translate(0,-1px) rotate(0deg)}40%{transform:translate(3px,-4px) rotate(.28deg)}75%{transform:translate(-1px,-2px) rotate(-.1deg)}}
+/* Sólo los extremos añadidos flotan; la coronilla y el rostro siguen anclados. */
+#overlay :is([data-pose="3"],[data-pose="4"]) .completion-fine-strands>path,
+#overlay [data-pose="3"] .completion-tresses>path{transform-box:fill-box;transform-origin:50% 0;animation:hair-tip-drift 9s -3s ease-in-out infinite}
+#overlay :is([data-pose="3"],[data-pose="4"]) .completion-fine-strands>path:nth-child(2n),
+#overlay [data-pose="3"] .completion-tresses>path:nth-child(2n){animation-duration:11s;animation-delay:-6s;animation-direction:reverse}
+#overlay :is([data-pose="3"],[data-pose="4"]) .completion-fine-strands>path:nth-child(3n){animation-duration:12.5s;animation-delay:-1s}
+@keyframes hair-tip-drift{0%,100%{transform:translate(0,0) rotate(-.2deg)}40%{transform:translate(-1.5px,-3px) rotate(.65deg)}75%{transform:translate(1px,-1px) rotate(-.35deg)}}
+#overlay:not(.open) :is(.pose-hair-left,.pose-hair-right,.completion-fine-strands>path,.completion-tresses>path),
+.ocean-paused #overlay :is(.pose-hair-left,.pose-hair-right,.completion-fine-strands>path,.completion-tresses>path){animation-play-state:paused!important}
+.pose-submersion-back,.pose-submersion-front{pointer-events:none}
+.submerged-current{animation:submerged-current 9s ease-in-out infinite}
+@keyframes submerged-current{0%,100%{transform:translate(0,0)}50%{transform:translate(0,-20px)}}
+.submersion-ripple{transform-origin:560px 920px;animation:submersion-ripple 6s ease-out infinite}
+.submersion-ripple.second{animation-delay:-3s}
+@keyframes submersion-ripple{0%{transform:scale(.7);opacity:0}18%{opacity:.45}100%{transform:scale(1.35);opacity:0}}
+.submerged-sheen{animation:submerged-sheen 13s ease-in-out infinite alternate}
+@keyframes submerged-sheen{from{transform:translate(-30px,-35px);opacity:.12}to{transform:translate(25px,40px);opacity:.3}}
+.submersion-bubble{animation:submersion-bubble 7s ease-in-out infinite;animation-delay:calc(var(--bubble)*-1.1s)}
+@keyframes submersion-bubble{0%{transform:translate(0,70px) scale(.6);opacity:0}15%{opacity:.55}85%{opacity:.35}100%{transform:translate(15px,-180px) scale(1);opacity:0}}
+.reload-section[data-moving=true] .pose-eye-aperture,.reload-section[data-moving=true] .pose-eye-lash{animation-play-state:paused!important}
+.section-character-ghost .pose-eye-aperture,.section-character-ghost .pose-eye-lash{animation-play-state:paused!important}

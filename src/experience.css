@@ -1,0 +1,39 @@
+/* Shared finishing touches, including the independently rendered menu. */
+:root {
+  --ease-water: cubic-bezier(.22, 1, .36, 1);
+  --scroll-track: #061632;
+  --scroll-thumb: #65ccd9;
+  --scroll-tip: #d4faff;
+}
+
+:root[data-theme=day] {
+  --scroll-track: #e9e2d6;
+  --scroll-thumb: #3d8c9b;
+  --scroll-tip: #97cace;
+}
+
+html { scrollbar-gutter: stable; }
+html:has(.app) { scrollbar-gutter: auto; }
+* { scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) var(--scroll-track); }
+
+/* Use the native, draggable scrollbar, not a simulated scrolling surface. */
+@supports selector(::-webkit-scrollbar) {
+  :root, :root * { scrollbar-color: auto !important; scrollbar-width: auto !important; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--scroll-track); }
+  ::-webkit-scrollbar-thumb {
+    border: 3px solid var(--scroll-track);
+    border-radius: 30px;
+    background: linear-gradient(180deg, var(--scroll-tip), var(--scroll-thumb));
+    min-height: 42px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--scroll-tip); }
+  ::-webkit-scrollbar-corner { background: var(--scroll-track); }
+}
+
+::selection { color: #fff; background: #9d447a; }
+button, a, summary { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 2px solid #f4bbd8;
+  outline-offset: 5px;
+}

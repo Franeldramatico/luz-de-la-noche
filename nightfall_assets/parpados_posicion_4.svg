@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1536" viewBox="0 0 1024 1536" overflow="visible">
+  <defs><linearGradient id="p4-lid-skin" x2="0" y2="1"><stop stop-color="#fff2eb"/><stop offset="1" stop-color="#fce5df"/></linearGradient></defs>
+  <g class="pose-eye" data-pivot="363 274 -24">
+    <path class="pose-eye-socket" d="M330 252Q353 236 377 240L396 251Q385 277 355 285L332 280Z" fill="url(#p4-lid-skin)"/>
+    <g class="pose-eye-texture"/>
+    <path class="pose-eye-lash" d="M335 278Q362 287 389 265" fill="none" stroke="#291b29" stroke-width="1.9" stroke-linecap="round"/>
+  </g>
+  <g class="pose-eye" data-pivot="455 211 -32">
+    <path class="pose-eye-socket" d="M426 197Q439 174 465 173L482 182 485 195Q468 219 438 219L427 210Z" fill="url(#p4-lid-skin)"/>
+    <g class="pose-eye-texture"/>
+    <path class="pose-eye-lash" d="M430 214Q454 226 480 199" fill="none" stroke="#291b29" stroke-width="1.9" stroke-linecap="round"/>
+  </g>
+</svg>

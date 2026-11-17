@@ -1,0 +1,96 @@
+.living-art{position:absolute;inset:0 auto auto 0;width:1672px;height:941px;z-index:0;pointer-events:none;opacity:0;transition:opacity .6s}
+.living-art>svg{width:100%;height:100%;overflow:visible}
+.art-ready .living-art{opacity:1}
+.art-ready .backdrop{visibility:hidden}
+.living-art .portrait{animation:living-portrait 9s ease-in-out infinite!important}
+@keyframes living-portrait{0%,100%{transform:translate(var(--look-x,0px),var(--look-y,0px)) rotate(0)}50%{transform:translate(calc(var(--look-x,0px) + 1px),calc(var(--look-y,0px) - 2px)) rotate(.08deg)}}
+.ocean-atmosphere{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:hidden}
+.ocean-stream{animation:ocean-ascent var(--duration) var(--phase) linear infinite;will-change:transform;opacity:0}
+.ocean-sway{animation:ocean-sway var(--sway) ease-in-out infinite alternate}
+.ocean-front{--alpha:.76;filter:drop-shadow(0 0 5px #5ceaff29)}
+.ocean-mid{--alpha:.58}
+.ocean-back{--alpha:.3}
+.ocean-mote{animation:ocean-mote 7s ease-in-out infinite;opacity:.35}
+.ocean-ray{transform-origin:50% 0;animation:ocean-ray 13s ease-in-out infinite alternate;mix-blend-mode:screen}
+.ocean-ray.second{animation-duration:18s;animation-delay:-6s}
+.ocean-caustic{animation:ocean-caustic 12s ease-in-out infinite alternate;mix-blend-mode:screen}
+.mobile-menu-title,.mobile-menu-caption{display:none}
+@keyframes ocean-ascent{0%{transform:translateY(0);opacity:0}8%{opacity:var(--alpha)}88%{opacity:var(--alpha)}100%{transform:translateY(calc(-1 * var(--travel)));opacity:0}}
+@keyframes ocean-sway{from{transform:translateX(-12px)}to{transform:translateX(15px)}}
+@keyframes ocean-mote{0%,100%{opacity:.08;translate:0 0}50%{opacity:.65;translate:7px -9px}}
+@keyframes ocean-ray{from{opacity:.2;transform:rotate(-7deg) scaleX(.85)}to{opacity:.6;transform:rotate(5deg) scaleX(1.15)}}
+@keyframes ocean-caustic{from{opacity:.12;transform:translate(-12px,4px)}to{opacity:.3;transform:translate(14px,-8px)}}
+.scene[data-reference=true] .living-art{visibility:hidden}
+.ocean-obscured .ocean-atmosphere{visibility:hidden}
+.ocean-paused .ocean-atmosphere *{animation-play-state:paused!important}
+.ocean-paused .living-art *{animation-play-state:paused!important}
+.scene.is-compact{inset:0;width:100%;height:100%;transform:none;box-shadow:none;overflow:hidden}
+.scene.is-compact .living-art,.scene.is-compact .backdrop{inset:0 auto auto 0;width:1672px;height:941px;transform:translate(var(--art-x),var(--art-y)) scale(var(--art-scale));transform-origin:0 0;mask-image:linear-gradient(to bottom,#000 0%,#000 79%,transparent 100%)}
+.scene.is-compact .living-art .logo{display:none}
+.scene.is-compact .living-art .hair{filter:none;animation:compact-hair 8s ease-in-out infinite;transform-origin:400px 600px}
+@keyframes compact-hair{0%,100%{transform:translate(0,0)}50%{transform:translate(1px,-1.5px)}}
+.scene.is-compact .menu{inset:auto max(22px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));width:min(100% - 44px,500px);margin-inline:auto;display:grid;gap:8px;transform:none;z-index:4;pointer-events:none}
+.scene.is-compact .menu::before{content:'';position:absolute;inset:-32px -24px -36px;background:linear-gradient(0deg,#03115aeb,#031563b8 68%,transparent);z-index:-1;pointer-events:none}
+.scene.is-compact .menu-item{position:relative;inset:auto!important;width:100%;height:auto;min-height:var(--menu-row);padding:7px 12px 7px 31px;display:flex;align-items:center;transform:none;font-size:clamp(29px,9.5vw,49px);letter-spacing:-.035em;line-height:1;translate:none!important;filter:none!important;text-shadow:0 2px 14px #00115544;touch-action:manipulation}
+.scene.is-compact .menu-item.reasons{font-size:clamp(23px,7.5vw,38px)}
+.scene.is-compact .menu-item .label-editable{display:flex;flex-wrap:nowrap;align-items:baseline;gap:.17em;padding:4px 6px 5px 0;transform:skewY(-3deg);animation:compact-label-in .65s .12s ease-out backwards}
+.scene.is-compact .menu-item .label-editable span{margin:0!important;animation:none;background-image:linear-gradient(145deg,#efffff,#62f4ff)}
+.scene.is-compact .menu-item.reasons .label-editable{animation-delay:.2s}
+.scene.is-compact .menu-item.letter .label-editable{animation-delay:.28s}
+.scene.is-compact .menu-item::before{content:'01';left:0;top:50%;width:auto;height:auto;transform:translateY(-50%);opacity:.65;clip-path:none;background:none;color:#fe87bb;font:600 11px Inter,sans-serif;letter-spacing:.03em}
+.scene.is-compact .menu-item.reasons::before{content:'02'}
+.scene.is-compact .menu-item.letter::before{content:'03'}
+.scene.is-compact .menu-item::after{bottom:0;left:0;width:100%;height:1px;transform:none;opacity:.3;background:linear-gradient(90deg,#69f9ff66,#65dfff11);box-shadow:none}
+.scene.is-compact .menu-item:active{background:#5ce9ff12}
+.scene.is-compact .menu-item:focus-visible{outline:2px solid #f6dd82;outline-offset:2px;border-radius:3px}
+.scene.is-compact .mobile-menu-caption{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 0 8px;color:#a0d6f0;font:500 7px Inter,sans-serif;letter-spacing:.13em}
+.mobile-menu-caption>span{font-size:6px;color:#6bf5ff}
+@keyframes compact-label-in{from{opacity:0;translate:12px 0}to{opacity:1;translate:0 0}}
+.scene.is-compact .subtle-light{height:100%;bottom:auto}
+.scene.is-compact .help-bar,.scene.is-compact .shard{display:none}
+.compact-menu .app{background:radial-gradient(ellipse at 80% 15%,#0088d2,#042eac 45%,#030c52 90%)}
+.compact-menu .mobile-menu-title{display:block;position:fixed;left:max(22px,env(safe-area-inset-left));top:max(25px,env(safe-area-inset-top));z-index:4;color:#e6ffff;font-family:'Barlow Condensed',Impact,sans-serif;font-style:italic;font-weight:900;font-size:clamp(22px,5.5vw,32px);letter-spacing:-.03em;line-height:.95;transform:rotate(-4deg);text-shadow:2px 3px 0 #001e6e}
+.mobile-menu-title span{color:#61f6ff;display:block;font-size:12px;letter-spacing:.12em;margin-top:5px}
+.scene.is-compact.is-landscape .menu{left:51%;right:max(22px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));width:auto;margin:0}
+.scene.is-landscape .menu-item{font-size:clamp(22px,4.5vw,43px)}
+.scene.is-compact.is-landscape .menu-item.reasons{font-size:clamp(18px,3.4vw,30px)}
+.scene.is-landscape .mobile-menu-caption>span{display:none}
+.scene.is-landscape .living-art,.scene.is-landscape .backdrop{mask-image:linear-gradient(to right,#000 0%,#000 42%,transparent 55%)}
+.compact-menu .overlay{padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
+.compact-menu .dialog{width:min(650px,100%);max-height:calc(100dvh - 32px - env(safe-area-inset-top) - env(safe-area-inset-bottom));padding:25px 22px;border-left-width:4px;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.compact-menu .dialog h1{font-size:clamp(36px,8vw,56px);margin-right:42px;line-height:.95}
+.compact-menu .dialog .lede{font-size:15px;line-height:1.7}
+.compact-menu .dialog .reasons-list{grid-template-columns:1fr}
+.compact-menu .close-dialog{position:sticky;float:right;top:0;right:auto;z-index:2;width:44px;height:44px;margin:-8px -6px 0 12px}
+@media(max-width:360px){.mobile-menu-title span{font-size:10px}.scene.is-compact .mobile-menu-caption{font-size:6px;letter-spacing:.08em}.scene.is-compact .mobile-menu-caption>span{font-size:5px}}
+@media(pointer:coarse){.compact-menu .ocean-front{filter:none}.compact-menu .ocean-ray,.compact-menu .ocean-current,.compact-menu .ocean-caustic{mix-blend-mode:normal}.scene.is-compact .menu-item:hover .label-editable{filter:none}}
+.bubble-sparkle{transform-box:fill-box;transform-origin:center;animation:bubble-sparkle 8s ease-in-out infinite;opacity:0}
+.ocean-heart{transform-box:fill-box;transform-origin:center;animation:glass-heart 16s ease-in-out infinite;opacity:0}
+.ocean-glint{transform-box:fill-box;transform-origin:center;animation:ocean-glint 11s ease-in-out infinite;opacity:0}
+.portrait-jewel{animation:jewel-shine 9s ease-in-out infinite;opacity:0}
+.portrait-jewel.second{animation-delay:-4s;animation-duration:12s}
+.menu-item .label-editable span{background-size:200% 200%;animation:letter-light 9s ease-in-out infinite}
+.menu-item.reasons .label-editable span{animation-delay:-3s}
+.menu-item.letter .label-editable span{animation-delay:-6s}
+.menu-item:hover .label-editable,.menu-item:focus-visible .label-editable{filter:drop-shadow(0 0 9px #65faff5c)}
+.menu-item:hover::after,.menu-item:focus-visible::after{box-shadow:0 0 12px #65faff80}
+.ocean-current{animation:tidal-current 17s ease-in-out infinite alternate;opacity:.18}
+.ocean-current.second{animation-delay:-8s;animation-duration:21s}
+@keyframes bubble-sparkle{0%,38%,55%,100%{opacity:0;scale:.3}45%{opacity:.9;scale:1}49%{opacity:.25;scale:.65}}
+@keyframes glass-heart{0%,70%,100%{opacity:0;transform:translateY(10px) rotate(-12deg) scale(.7)}15%,48%{opacity:.35;transform:translateY(-16px) rotate(8deg) scale(1)}}
+@keyframes ocean-glint{0%,63%,80%,100%{opacity:0;scale:.3;rotate:0deg}70%{opacity:.75;scale:1;rotate:15deg}74%{opacity:.25;scale:.6;rotate:25deg}}
+@keyframes jewel-shine{0%,55%,78%,100%{opacity:0}65%{opacity:.8}70%{opacity:.2}}
+@keyframes letter-light{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+@keyframes tidal-current{from{transform:translate(-15px,5px) scaleY(.96);opacity:.08}to{transform:translate(16px,-9px) scaleY(1.04);opacity:.24}}
+
+/* Apertura narrativa: primero el agua, después la caída y al final la flotación. */
+.scene:not([data-arrival=settled]) .scene-environment{opacity:0}
+.scene:not([data-arrival=settled]) .living-art .portrait,.scene:not([data-arrival=settled]) .living-art .logo{opacity:0}
+.scene:not([data-arrival=settled]) .living-art *{animation-play-state:paused!important}
+.scene:is([data-arrival=falling],[data-arrival=landing],[data-arrival=revealing]) .arrival-portrait{display:inline;transform-origin:310px 630px;will-change:transform}
+.scene:is([data-arrival=pending],[data-arrival=falling]) .menu{visibility:hidden}
+.scene:is([data-arrival=landing],[data-arrival=revealing],[data-arrival=settled]) .menu-item .label-editable{animation:arrival-label .6s calc(var(--intro-order,0) * .11s) ease-out backwards}
+.menu-item.story{--intro-order:0}.menu-item.reasons{--intro-order:1}.menu-item.letter{--intro-order:2}
+@keyframes arrival-label{from{opacity:0;translate:18px -5px}to{opacity:1;translate:0 0}}
+.scene[data-arrival=settled] .living-art .logo{transition:opacity .4s}
+.arrival-effects{pointer-events:none}

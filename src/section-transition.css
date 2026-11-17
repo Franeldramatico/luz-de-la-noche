@@ -1,0 +1,25 @@
+.section-immersion{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none;contain:layout paint}
+.immersion-light{position:absolute;inset:0;background:radial-gradient(ellipse at var(--contact-x) var(--contact-y),#b7f4ff42,transparent 48%),linear-gradient(125deg,transparent 30%,#68d4ed24 49%,transparent 65%);opacity:0}
+.immersion-water{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.immersion-ring,.immersion-crown,.immersion-drop,.immersion-bubble{transform-origin:0 0}
+.pose-completion>svg{overflow:visible;max-width:none}
+.completion-crown>path[fill="none"]{opacity:.18;stroke-width:1}
+.completion-crown>path:first-child{fill:#0a0a13;stroke:#090a12}
+.pose-completion-front>g>path{opacity:.15;stroke-width:1}
+.completion-tresses{animation:completion-current 9s ease-in-out infinite;transform-origin:300px 700px}
+@keyframes completion-current{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(-1px,-2px) rotate(-.15deg)}}
+.section-character .section-model-float{animation-duration:10s}
+#overlay .pose-waterlight{animation-duration:16s}
+.reload-section:not(.open) .pose-completion *{animation-play-state:paused!important}
+/* Reservar espacio para la silueta reconstruida, también en pantallas cortas. */
+@media(max-width:900px) and (orientation:portrait){
+  #overlay[data-page=historia] .section-character{width:440px;height:440px;left:calc(77% - 220px);top:120px}
+  #overlay[data-page=carta] .section-character{width:440px;height:440px;left:calc(77% - 220px);top:95px}
+  #overlay .history-chapters{margin-top:170px}
+  #overlay .reason-selector{margin-top:210px}
+  #overlay .section-letter{margin-top:190px}
+}
+@media(max-width:900px) and (orientation:landscape){
+  #overlay[data-page=historia] .section-character,#overlay[data-page=carta] .section-character{--complete-box:calc((100dvh - 120px)*1.05);width:var(--complete-box);height:var(--complete-box);left:calc(23% - var(--complete-box)/2);top:100px}
+  #overlay[data-page=razones] .section-character{--pose-box:calc((100dvh - 125px)*.95);width:var(--pose-box);height:var(--pose-box);left:calc(79% - var(--pose-box)/2);top:calc(110px - var(--pose-box)*.31575)}
+}

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1671" height="1120" viewBox="0 0 1671 1120" overflow="visible">
+  <defs>
+    <linearGradient id="mem-glass" x2=".4" y2="1"><stop stop-color="#a9ffff" stop-opacity=".24"/><stop offset="1" stop-color="#126bca" stop-opacity=".025"/></linearGradient>
+    <linearGradient id="mem-edge"><stop stop-color="#5ef2ff" stop-opacity="0"/><stop offset=".5" stop-color="#d1ffff" stop-opacity=".9"/><stop offset="1" stop-color="#5ef2ff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <g class="set-memory-orbit" fill="none" stroke="#8cffff" stroke-width="1.5">
+    <ellipse cx="720" cy="470" rx="665" ry="375" transform="rotate(-16 720 470)" opacity=".2"/>
+    <ellipse cx="720" cy="470" rx="704" ry="403" transform="rotate(-16 720 470)" stroke-dasharray="2 24" opacity=".32"/>
+  </g>
+  <g class="set-memory-ribbon">
+    <path d="M-120 950C250 1000 465 766 860 854S1420 905 1760 656L1788 765C1410 1023 1170 1018 845 944S220 1104-120 1048Z" fill="url(#mem-glass)" stroke="#6eefff" stroke-opacity=".34" stroke-width="1.4"/>
+    <path d="M-120 950C250 1000 465 766 860 854S1420 905 1760 656M-120 1048C220 1104 520 870 845 944S1410 1023 1788 765" fill="none" stroke="url(#mem-edge)" stroke-width="3"/>
+    <path d="M50 972l2 65m210-99 19 69m204-127 17 77m218-96-6 77m224-38-15 80m239-63-11 79m210-121 25 73m143-178 40 80" stroke="#9ffaff" stroke-width="1.4" opacity=".3"/>
+    <g fill="#a7ffff" opacity=".6"><path d="M70 964h8v5h-8zm30-2h8v5h-8zm30-4h8v5h-8zm30-5h8v5h-8zm30-8h8v5h-8zm30-10h8v5h-8z"/></g>
+  </g>
+  <g class="set-memory-shards" fill="url(#mem-glass)" stroke="#a8ffff" stroke-width="1.3">
+    <path d="m1120 180 182-28 23 140-182 28Z"/><path d="m1160 196 119-18 15 91-119 18Z" opacity=".45"/>
+    <path d="m75 333 132 20-18 113-132-20Z"/><path d="m92 356 94 14-10 72-94-14Z" opacity=".45"/>
+    <path d="m1390 565 145-68 57 122-145 68Z"/>
+    <g fill="#ddffff" stroke="none" opacity=".7" font-family="Barlow Condensed, sans-serif" font-style="italic" font-weight="700" font-size="28"><text x="1160" y="260" transform="rotate(-9 1160 260)">01 / EL COMIENZO</text><text x="86" y="425" transform="rotate(8 86 425)">02</text><text x="1447" y="601" transform="rotate(-25 1447 601)">03</text></g>
+  </g>
+  <g class="set-node-pulse" fill="#ddffff"><path d="m1300 119 3 12 12 3-12 3-3 12-3-12-12-3 12-3Z"/><circle cx="172" cy="430" r="4"/><circle cx="1460" cy="690" r="5"/></g>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1670" height="1180" viewBox="0 0 1670 1180" overflow="visible">
+  <defs>
+    <linearGradient id="letter-moon" x2=".5" y2="1"><stop stop-color="#ffe9c9" stop-opacity=".65"/><stop offset="1" stop-color="#b8bfff" stop-opacity=".08"/></linearGradient>
+    <linearGradient id="letter-sheet" x2="1" y2="1"><stop stop-color="#fff0d8" stop-opacity=".17"/><stop offset="1" stop-color="#fff0d8" stop-opacity=".02"/></linearGradient>
+  </defs>
+  <g class="set-letter-orbit" fill="none" stroke="#f3d4b0" stroke-width="1.3">
+    <ellipse cx="900" cy="380" rx="580" ry="430" transform="rotate(-18 900 380)" opacity=".3"/><ellipse cx="900" cy="380" rx="618" ry="465" transform="rotate(-18 900 380)" stroke-dasharray="2 22" opacity=".3"/>
+  </g>
+  <path class="set-letter-moon" transform="translate(70 -160)" d="M1330 80C1100 81 1040 355 1229 454 1106 440 1029 330 1051 219 1079 76 1215 16 1330 80Z" fill="url(#letter-moon)" stroke="#ffe4c4" stroke-opacity=".3"/>
+  <g class="set-letter-pages" fill="url(#letter-sheet)" stroke="#f4d7b6" stroke-opacity=".4" stroke-width="1.4">
+    <path d="m130 760 160-36 39 175-160 36Z"/><path d="m156 783 109-24m-104 44 109-24m-104 44 86-19m-82 38 74-17"/>
+    <path d="m1380 430 171 41-42 175-171-41Z"/><path d="m1395 468 116 27m-121-7 116 27m-120-7 91 22"/>
+    <path d="m1160 920 126-39 43 138-126 39Z"/>
+  </g>
+  <g class="set-ink-line" fill="none" stroke="#e8bfcf" stroke-width="1.7" opacity=".46"><path d="M-30 1090C270 878 455 1170 712 982S1180 1030 1720 770"/><path d="M-40 1104C260 892 460 1183 720 996S1185 1044 1726 784" opacity=".25"/></g>
+  <g class="set-node-pulse" fill="#fff0d8"><path d="m1380 160 3 15 15 3-15 3-3 15-3-15-15-3 15-3Z"/><path d="m295 595 3 12 12 3-12 3-3 12-3-12-12-3 12-3Z"/><circle cx="1515" cy="740" r="4"/></g>
+</svg>

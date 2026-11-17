@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1671" height="941" viewBox="0 0 1671 941" overflow="visible">
+  <defs>
+    <linearGradient id="p2-crown" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#131322"/><stop offset=".55" stop-color="#090910"/><stop offset="1" stop-color="#171422"/></linearGradient>
+    <linearGradient id="p2-tress"><stop stop-color="#080911"/><stop offset=".5" stop-color="#191828"/><stop offset="1" stop-color="#070a14"/></linearGradient>
+    <linearGradient id="p2-thread"><stop stop-color="#1556a6" stop-opacity="0"/><stop offset=".5" stop-color="#2345ca" stop-opacity=".65"/><stop offset="1" stop-color="#564366" stop-opacity=".1"/></linearGradient>
+  </defs>
+  <g class="completion-crown">
+    <path d="M278 53C326-38 361-72 447-100 505-139 571-146 640-131 722-150 795-100 829-75 893-54 928-30 979 40L914 57 330 73Z" fill="url(#p2-crown)" stroke="#0a0b14" stroke-width="3"/>
+    <path d="M305 34C360-59 433-94 552-111 460-72 385-18 354 42M454 24C488-61 546-106 640-131 583-75 568-37 562 13M654 9C658-57 652-101 640-131 735-101 807-57 855 18M763-92C862-91 944-7 979 40" fill="none" stroke="#252334" stroke-width="7"/>
+    <path d="M325 1C352-34 389-69 430-84L391-32 367-20 350 6ZM752-78 819-46 847-8 815-18 789-47Z" fill="#075bd4" opacity=".75"/>
+    <path d="M427-73 450-94 442-72 418-44ZM875-17 905-2 915 19 892 7Z" fill="#4b3e8e" opacity=".6"/>
+    <path d="M294 13C335-78 465-171 574-133M501-104C578-168 740-145 840-71M782-98C848-83 919-36 954 12" fill="none" stroke="url(#p2-thread)" stroke-width="2"/>
+  </g>
+  <g class="completion-tresses" fill="url(#p2-tress)" stroke="#0a0b15" stroke-width="2">
+    <path d="M31 523C-67 515-125 576-92 632-67 678 5 647 15 618-13 643-58 632-56 603-51 575 5 574 40 574Z"/>
+    <path d="M107 480C23 485-44 451-19 420-81 466-43 535 19 537 74 541 96 512 107 480Z"/>
+    <path d="M19 570C-17 570-61 589-58 615M-48 483C-23 519 29 526 62 507" fill="none" stroke="url(#p2-thread)" stroke-width="4"/>
+  </g>
+  <g class="completion-seams" fill="none" stroke-linecap="round">
+    <path d="M340 28Q390-61 468-84M484 23Q513-71 615-116M691-103Q762-77 802 27M863-35Q904-9 934 32" stroke="#1e1b2d" stroke-width="3"/>
+    <path d="M353 15Q391-41 419-52M776-61Q808-35 829 4" stroke="#273e9c" stroke-width="2" opacity=".5"/>
+  </g>
+</svg>

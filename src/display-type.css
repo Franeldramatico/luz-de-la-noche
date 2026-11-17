@@ -1,0 +1,108 @@
+/* Shared display typography for the homepage and menu iframe.
+   Inter and Georgia body text, captions, and song lyrics remain unchanged.
+   Important is limited to the font face/weight/style: older scene styles use
+   highly specific font shorthands which must not restore the previous face.
+   :root prefixes keep size overrides stable when Vite extracts shared CSS
+   before entry-specific styles in the production build. */
+:root { --display: 'Teko', Impact, 'Arial Narrow', sans-serif; }
+
+h1, h2, h3, .logo, .btn, button, button > span,
+.brand-monogram, .reload-brand > span:last-child, .reload-brand b,
+.open-menu > span, .close-nightfall > span,
+.quiet-section > p, .quiet-section em, .quiet-watermark,
+.scene-caption p, .mobile-menu-title, .mobile-menu-title > span,
+.section-watermark, .history-chapters > button > span:first-child,
+.envelope-to, .soundtrack-summary strong,
+.soundtrack-full-lyrics > summary, .soundtrack-options > summary {
+  font-family: var(--display) !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+}
+:root :is(h1, h2, h3, .logo, .btn, button,
+.brand-monogram, .reload-brand > span:last-child,
+.open-menu > span, .close-nightfall > span,
+.mobile-menu-title, .section-watermark) {
+  letter-spacing: .02em;
+}
+
+/* Homepage: roughly 1.15× the preceding display sizes. */
+:root .reload-copy h1 { font-size: clamp(87px, 10.235vw, 163px); line-height: .95; letter-spacing: .02em; }
+:root .brand-monogram { font-size: 40px; letter-spacing: .02em; }
+:root .reload-brand > span:last-child { font-size: 20px; line-height: 1.05; }
+:root .open-menu > span { font-size: 18px; letter-spacing: .02em; }
+:root .story-button { font-size: 20px; line-height: 1.2; letter-spacing: .02em; }
+:root .text-link { font-size: 15px; line-height: 1.4; }
+:root .auto-button { font-size: 12px; line-height: 1.2; }
+:root .close-nightfall > span { font-size: 20px; letter-spacing: .02em; }
+:root .quiet-section > p { font-size: clamp(40px, 4.6vw, 66px); }
+:root .scene-caption p { font-size: 28px; }
+:root .quiet-watermark { font-size: clamp(161px, 28.75vw, 402px); }
+
+/* Player headings/actions use Teko; artist metadata and lyrics retain Inter. */
+:root .soundtrack-panel h2 { font-size: 36px; letter-spacing: .02em; }
+:root .soundtrack-summary strong { font-size: 14px; line-height: 1.25; }
+.soundtrack-summary > span, .soundtrack-summary small {
+  font-family: Inter, 'Segoe UI', sans-serif;
+}
+.soundtrack-summary small { font-weight: 400; }
+:root .soundtrack .soundtrack-translate { font-size: 15px; letter-spacing: .02em; }
+:root .soundtrack-import > button { font-size: 15px; }
+:root .soundtrack :is(.soundtrack-full-lyrics, .soundtrack-options) > summary { font-size: 15px; }
+:root .soundtrack--menu:not(.soundtrack--expanded) .soundtrack-summary strong { font-size: 13px; }
+
+/* Illustrated menu: preserve the artwork, positions, and body typography. */
+:root .menu-item { letter-spacing: .02em; line-height: .8; }
+:root .menu-item.story { font-size: 90px; }
+:root .menu-item.reasons { font-size: 60px; top: 698px; }
+:root .menu-item.letter { font-size: 82px; top: 790px; }
+:root.compact-menu .mobile-menu-title { font-size: clamp(25px, 6.325vw, 37px); letter-spacing: .02em; line-height: 1.05; }
+:root .mobile-menu-title > span { font-size: 14px; letter-spacing: .02em; }
+:root .scene.is-compact .menu-item { font-size: clamp(33px, 10.925vw, 56px); letter-spacing: .02em; line-height: 1.05; }
+:root .scene.is-compact .menu-item.reasons { font-size: clamp(26px, 8.625vw, 44px); }
+:root .scene.is-landscape .menu-item { font-size: clamp(25px, 5.175vw, 49px); }
+:root .scene.is-compact.is-landscape .menu-item.reasons { font-size: clamp(21px, 3.91vw, 35px); }
+:root #overlay #dialog-title { font-size: clamp(75px, 10.12vw, 152px); line-height: .95; letter-spacing: .02em; }
+:root #overlay[data-page=carta] #dialog-title { letter-spacing: .02em; }
+:root #overlay .history-memory h2 { font-size: 39px; letter-spacing: .02em; }
+:root #overlay .reason-feature h2 { font-size: 44px; letter-spacing: .02em; }
+:root #overlay .section-letter-paper h2 { font-size: 35px; letter-spacing: .02em; }
+:root #overlay.reload-section .close-dialog { font-size: 15px; letter-spacing: .02em; }
+:root .section-tabs > button { font-size: 15px; letter-spacing: .02em; }
+:root .history-chapters > button > span:nth-child(2) { font-size: 16px; }
+:root .history-chapters > button > span:first-child { font-size: 23px; }
+:root .reason-selector > button { font-size: 33px; }
+:root .envelope-to { font-size: 20px; letter-spacing: .02em; }
+
+@media (min-width: 1600px) { :root .reload-copy h1 { font-size: 177px; } }
+@media (max-height: 850px) and (min-width: 901px) { :root .reload-copy h1 { font-size: 115px; } }
+@media (max-width: 1100px) and (min-width: 901px) { :root #overlay #dialog-title { font-size: 107px; } }
+@media (max-width: 1000px) {
+  :root .reload-copy h1 { font-size: 127px; }
+  :root .scene-caption p { font-size: 25px; }
+}
+@media (max-width: 900px) {
+  :root #overlay #dialog-title { font-size: clamp(68px, 17.25vw, 101px); max-width: 300px; line-height: .95; }
+  :root #overlay.reload-section .close-dialog { font-size: 14px; }
+  :root .section-tabs > button { font-size: 13px; }
+  :root .history-chapters > button > span:nth-child(2) { font-size: 15px; }
+  :root #overlay .history-memory h2, :root #overlay .reason-feature h2 { font-size: 37px; }
+  :root #overlay .section-letter-paper h2 { font-size: 31px; }
+}
+@media (max-width: 900px) and (orientation: landscape) { :root #overlay #dialog-title { font-size: 76px; } }
+@media (max-width: 700px) {
+  :root .brand-monogram { font-size: 33px; }
+  :root .reload-brand > span:last-child { font-size: 16px; }
+  :root .reload-copy h1 { font-size: clamp(50px, 16.9vw, 118px); line-height: .95; }
+  :root .story-button { font-size: 18px; }
+  :root .quiet-section > p { font-size: 43px; }
+  :root .scene-caption p { font-size: 31px; }
+  :root .soundtrack-panel h2 { font-size: 33px; }
+}
+@media (max-width: 370px) {
+  :root .reload-brand > span:last-child { font-size: 14px; }
+  :root .reload-copy h1 { font-size: clamp(48px, 16.9vw, 62px); }
+}
+@media (max-width: 360px) {
+  :root #overlay #dialog-title { font-size: 72px; }
+  :root .section-tabs > button { font-size: 12px; }
+}

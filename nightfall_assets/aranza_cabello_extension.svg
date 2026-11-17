@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1672" height="1280" viewBox="0 0 1672 1280" overflow="visible">
+  <!-- Continuación ilustrada del cabello. Coordenadas originales: no desplaza el retrato. -->
+  <!-- Un solape pequeño dentro del cabello suaviza la unión, sin mover el retrato. -->
+  <defs>
+    <clipPath id="hair-tail-beyond-frame"><path d="M0 910H1672V1280H0Z"/></clipPath>
+    <linearGradient id="hair-tail-ink" x1="250" y1="928" x2="510" y2="1190" gradientUnits="userSpaceOnUse"><stop stop-color="#040612"/><stop offset=".5" stop-color="#090b20"/><stop offset="1" stop-color="#030510"/></linearGradient>
+    <linearGradient id="hair-tail-left" x1="155" y1="935" x2="315" y2="1080" gradientUnits="userSpaceOnUse"><stop stop-color="#0b082b"/><stop offset=".35" stop-color="#080b24"/><stop offset="1" stop-color="#020510"/></linearGradient>
+    <linearGradient id="hair-tail-right" x1="643" y1="939" x2="769" y2="1072" gradientUnits="userSpaceOnUse"><stop stop-color="#060c5b"/><stop offset=".38" stop-color="#050b39"/><stop offset="1" stop-color="#02040f"/></linearGradient>
+    <linearGradient id="hair-tail-blue" x1="660" y1="937" x2="745" y2="1070" gradientUnits="userSpaceOnUse"><stop stop-color="#080ca0"/><stop offset=".45" stop-color="#0729bf"/><stop offset="1" stop-color="#0b1648"/></linearGradient>
+    <linearGradient id="hair-tail-sheen" x1="320" y1="950" x2="465" y2="1150" gradientUnits="userSpaceOnUse"><stop stop-color="#151630"/><stop offset=".65" stop-color="#10152d"/><stop offset="1" stop-color="#060915"/></linearGradient>
+  </defs>
+  <g clip-path="url(#hair-tail-beyond-frame)" stroke="#02040e" stroke-width="1.1" stroke-linejoin="round">
+    <!-- Silueta trasera: mechones separados, sin una base horizontal. -->
+    <path d="M144 905C129 960 170 1008 230 1027 251 1034 268 1049 276 1072 278 1028 248 994 218 972 195 955 192 930 202 904Z" fill="url(#hair-tail-left)"/>
+    <path d="M203 900C179 969 221 1017 300 1055 334 1072 358 1107 355 1146 387 1111 379 1063 336 1028 294 993 290 951 307 901Z" fill="url(#hair-tail-ink)"/>
+    <path d="M299 900C277 968 311 1027 361 1064 401 1093 424 1142 408 1187 451 1165 467 1130 446 1091 428 1056 392 1002 429 901Z" fill="url(#hair-tail-ink)"/>
+    <path d="M409 901C380 963 424 1020 466 1056 507 1090 538 1124 519 1165 555 1147 572 1123 553 1084 533 1042 503 1004 537 900Z" fill="url(#hair-tail-ink)"/>
+    <path d="M520 901C492 961 548 1018 589 1046 623 1070 641 1097 630 1134 661 1119 692 1087 663 1054 631 1018 617 965 663 901Z" fill="url(#hair-tail-ink)"/>
+    <path d="M649 887C685 940 763 945 783 991 804 1043 743 1091 686 1084 731 1065 758 1037 737 1011 718 988 670 997 643 975 618 951 627 914 649 887Z" fill="url(#hair-tail-right)"/>
+    <path d="M707 886C763 921 809 969 806 1018 803 1060 756 1080 716 1070 761 1058 781 1017 755 985 736 963 709 948 694 925Z" fill="#050615"/>
+
+    <!-- Sombras en planos de color, siguiendo el estilo de la ilustración. -->
+    <g stroke="none">
+      <path d="M172 900C173 974 199 998 230 1013 213 990 204 970 204 900Z" fill="#101338"/>
+      <path d="M222 900C214 991 260 1024 300 1043 329 1057 347 1082 354 1107 353 1068 332 1045 304 1024 271 1000 253 970 262 900Z" fill="#101329"/>
+      <path d="M316 900C301 986 334 1027 374 1061 402 1086 418 1113 418 1144 430 1109 413 1080 390 1055 359 1016 347 974 366 900Z" fill="url(#hair-tail-sheen)"/>
+      <path d="M356 900C348 989 377 1026 393 1042 379 1010 381 973 394 900Z" fill="#0b0d20"/>
+      <path d="M425 900C407 989 453 1039 484 1062 509 1083 529 1108 530 1132 536 1103 515 1073 492 1051 460 1019 449 974 466 900Z" fill="#10132b"/>
+      <path d="M526 900C514 987 563 1029 595 1051 618 1068 637 1086 639 1103 643 1077 625 1058 602 1040 565 1012 559 970 578 900Z" fill="#0c1027"/>
+      <path d="M615 900C592 977 618 1014 637 1034 627 1007 633 977 651 900Z" fill="#080b21"/>
+      <path d="M659 910C679 963 726 973 749 999 771 1025 752 1056 724 1069 767 1062 787 1027 771 1000 750 965 698 953 690 910Z" fill="url(#hair-tail-blue)"/>
+      <path d="M726 910C755 962 777 985 781 1007 782 982 764 955 749 910Z" fill="#11112b"/>
+      <path d="M199 940C198 978 222 1004 244 1019 221 991 226 977 221 961Z" fill="#0b2384" opacity=".55"/>
+    </g>
+    <!-- Reflejos finos: no se añade ni se mueve ningún mechón del rostro. -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M239 963C233 1001 290 1029 320 1050" stroke="#1b2445" stroke-width="1.1" opacity=".55"/>
+      <path d="M339 959C331 1004 376 1040 401 1071" stroke="#25243d" stroke-width="1" opacity=".5"/>
+      <path d="M458 966C447 1002 481 1041 506 1066" stroke="#1a2245" stroke-width="1" opacity=".65"/>
+      <path d="M554 966C552 997 585 1026 612 1045" stroke="#1d2540" stroke-width="1" opacity=".5"/>
+      <path d="M690 958C723 976 752 990 756 1012" stroke="#2349c7" stroke-width="1.4" opacity=".7"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="menu-eyes" viewBox="200 630 160 120" aria-hidden="true">
+  <defs><linearGradient id="menu-eyelid-skin" x2="0" y2="1"><stop stop-color="#fcf8f1"/><stop offset="1" stop-color="#f9eee7"/></linearGradient></defs>
+  <g class="menu-eyelid"><path d="M215 648Q223 641 232 648Q240 654 239 665L235 675Q225 681 212 673Q211 660 215 648Z" fill="url(#menu-eyelid-skin)"/><path d="M213 670Q225 678 237 668" fill="none" stroke="#281e2d" stroke-width="2.8" stroke-linecap="round"/></g>
+  <g class="menu-eyelid"><path d="M311 699Q321 694 334 701Q347 707 350 722Q350 730 341 735Q326 738 318 728Q312 719 311 699Z" fill="url(#menu-eyelid-skin)"/><path d="M317 727Q330 738 347 728" fill="none" stroke="#281e2d" stroke-width="3" stroke-linecap="round"/></g>
+</svg>

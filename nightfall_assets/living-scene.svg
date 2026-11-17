@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1672 941">
+  <!-- Capas recortadas de la ilustración original; el archivo WebP no se modifica. -->
+  <defs>
+    <path id="portrait-outline" d="M544-15H785L727 83 678 139 657 199 620 253 603 316 576 363 568 409 584 454 607 477 625 520 647 548 651 584 663 611 659 649 679 679 679 717 704 758 704 796 739 827 748 859 780 899 790 960H-20V626L15 594 24 551 50 521 89 504 117 465 148 446 174 411 212 394 252 387 294 400 325 379 355 359 378 317 402 281 422 234 447 204 468 159 494 111 512 65Z"/>
+    <path id="logo-outline" d="M628 352L1008 193 1058 292 1064 481 687 549 641 474Z"/>
+    <clipPath id="portrait-mask"><use xlink:href="#portrait-outline"/></clipPath>
+    <clipPath id="logo-mask"><use xlink:href="#logo-outline"/></clipPath>
+    <clipPath id="hair-left"><path d="M9 580Q64 488 142 448L209 408 285 408 278 490 195 565 198 643 172 734 181 836 218 941H0Z"/></clipPath>
+    <clipPath id="hair-right"><path d="M456 385L569 332 590 438 623 494 656 565 658 640 685 693 686 745 729 810 760 855 793 941H531L540 861 490 816 467 743 468 675 460 590 425 532Z"/></clipPath>
+    <linearGradient id="underpaint" x2="1" y2=".5"><stop stop-color="#fff"/><stop offset=".43" stop-color="#fff"/><stop offset=".45" stop-color="#008dd7"/><stop offset="1" stop-color="#031788"/></linearGradient>
+    <linearGradient id="skin" x2="0" y2="1"><stop stop-color="#fcf8f1"/><stop offset="1" stop-color="#f9eee7"/></linearGradient>
+    <linearGradient id="arrival-hair-cutout-fade" x1="0" y1="910" x2="0" y2="941" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset=".18" stop-color="white"/><stop offset="1" stop-color="black"/></linearGradient>
+    <mask id="arrival-hair-cutout-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1672" height="941"><path d="M0 0H1672V941H0Z" fill="url(#arrival-hair-cutout-fade)"/></mask>
+    <filter id="hair-flow" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".008 .012" numOctaves="1" seed="4" result="flow"><animate attributeName="baseFrequency" values=".008 .012;.009 .016;.008 .012" dur="12s" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" in2="flow" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs>
+  <style>
+    .portrait{transform-origin:310px 630px;animation:portrait-float 9s ease-in-out infinite}
+    .logo{transform-origin:850px 385px;animation:logo-float 8s ease-in-out infinite}
+    .eyelid{transform-box:fill-box;transform-origin:center bottom;transform:scaleY(0);animation:blink 5.8s ease-in-out infinite}
+    .hair{filter:url(#hair-flow)}
+    .arrival-portrait{display:none}
+    @keyframes portrait-float{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(1px,-2px) rotate(.08deg)}}
+    @keyframes logo-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
+    @keyframes blink{0%,16%,23%,59%,66%,100%{transform:scaleY(0)}18%,20%,61%,63%{transform:scaleY(1)}}
+  </style>
+  <image class="arrival-water" xlink:href="agua_portada.webp" width="1672" height="941" preserveAspectRatio="none"/>
+  <g class="scene-environment">
+    <path fill="url(#underpaint)" d="M0 0H1672V941H0Z"/>
+    <image xlink:href="escenario_sin_menu.webp" width="1672" height="941"/>
+    <!-- Fondo clonado del agua para separar el logotipo sin inventar una placa de color. -->
+    <image xlink:href="escenario_sin_menu.webp" x="-520" width="1672" height="941" clip-path="url(#logo-mask)"/>
+  </g>
+  <g class="arrival-portrait">
+    <!-- HAIR_COMPLETION -->
+    <image xlink:href="aranza_recortada.webp" width="1672" height="941" mask="url(#arrival-hair-cutout-mask)"/>
+  </g>
+  <g class="portrait">
+    <image xlink:href="escenario_sin_menu.webp" width="1672" height="941" clip-path="url(#portrait-mask)"/>
+    <g clip-path="url(#hair-left)"><image class="hair" xlink:href="escenario_sin_menu.webp" width="1672" height="941"/></g>
+    <g clip-path="url(#hair-right)"><image class="hair" xlink:href="escenario_sin_menu.webp" width="1672" height="941"/></g>
+    <g class="eyelid"><path d="M215 648Q223 641 232 648Q240 654 239 665L235 675Q225 681 212 673Q211 660 215 648Z" fill="url(#skin)"/><path d="M213 670Q225 678 237 668" fill="none" stroke="#281e2d" stroke-width="2.8" stroke-linecap="round"/></g>
+    <g class="eyelid"><path d="M311 699Q321 694 334 701Q347 707 350 722Q350 730 341 735Q326 738 318 728Q312 719 311 699Z" fill="url(#skin)"/><path d="M317 727Q330 738 347 728" fill="none" stroke="#281e2d" stroke-width="3" stroke-linecap="round"/></g>
+    <g class="portrait-jewel" transform="translate(548 733)"><path d="M0-7Q1-1 7 0Q1 1 0 7Q-1 1-7 0Q-1-1 0-7Z" fill="#e0ffff"/></g>
+    <g class="portrait-jewel second" transform="translate(278 658)"><path d="M0-4Q1-1 4 0Q1 1 0 4Q-1 1-4 0Q-1-1 0-4Z" fill="#e0ffff"/></g>
+  </g>
+  <image class="logo" xlink:href="escenario_sin_menu.webp" width="1672" height="941" clip-path="url(#logo-mask)"/>
+</svg>

@@ -1,0 +1,122 @@
+/* Dirección por escena y capas vivas: agua, escenografía, modelo, lectura. */
+.section-water-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .7s}
+.section-water-canvas[data-water-ready=true]{opacity:1}
+#overlay #dialog-title{background-image:linear-gradient(110deg,#f5ffffed,#b5ffffd9),url('../nightfall_assets/agua_portada.webp');background-size:100% 100%,180% 160%;background-position:0 0,0 45%;background-blend-mode:screen;background-clip:text;-webkit-background-clip:text;color:transparent;animation:section-title-water 18s ease-in-out infinite alternate}
+@keyframes section-title-water{from{background-position:0 0,0 35%}to{background-position:0 0,100% 60%}}
+.section-character[data-pose="2"],.section-character[data-pose="3"]{mask-image:none}
+.pose-stage-set>svg,.pose-eyes>svg{max-width:none;overflow:visible}
+.pose-stage-set{pointer-events:none}
+.section-character-ghost *{animation-play-state:paused!important}
+.pose-hair-left{animation:pose-hair-left 8.5s ease-in-out infinite;transform-origin:300px 350px}
+.pose-hair-right{animation:pose-hair-right 10s ease-in-out infinite;transform-origin:1100px 400px}
+@keyframes pose-hair-left{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(-1.5px,-2px) rotate(-.12deg)}}
+@keyframes pose-hair-right{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(1.5px,-2px) rotate(.1deg)}}
+.pose-waterlight{animation:pose-waterlight 11s ease-in-out infinite alternate}
+.pose-waterlight.second{animation-duration:16s;animation-delay:-6s}
+@keyframes pose-waterlight{from{transform:translate(-20px,-80px);opacity:.09}to{transform:translate(24px,90px);opacity:.22}}
+.set-memory-ribbon{animation:memory-film-float 12s ease-in-out infinite}
+.set-memory-shards{animation:memory-shards-float 10s ease-in-out infinite}
+.set-node-pulse{animation:set-pulse 6s ease-in-out infinite}
+@keyframes memory-film-float{0%,100%{transform:translate(0,0)}50%{transform:translate(-8px,-15px)}}
+@keyframes memory-shards-float{0%,100%{transform:translate(0,0)}50%{transform:translate(8px,-12px)}}
+@keyframes set-pulse{0%,100%{opacity:.25}50%{opacity:.9}}
+.set-memory-shards>path{transition:fill .5s,stroke .5s}
+[data-memory="0"] .set-memory-shards>path:first-child,[data-memory="1"] .set-memory-shards>path:nth-child(3),[data-memory="2"] .set-memory-shards>path:nth-child(5){fill:#baffff35;stroke:#e1ffff}
+.set-likes-shell>ellipse:last-of-type{transform-origin:490px 795px;transform:rotate(var(--link-angle,0deg));transition:transform 1.1s cubic-bezier(.22,1,.36,1)}
+.set-likes-seat{transform-origin:470px 1535px;animation:seat-breathe 7s ease-in-out infinite}
+.set-heart-rise{animation:heart-constellation 12s ease-in-out infinite}
+@keyframes seat-breathe{0%,100%{transform:scale(.97);opacity:.45}50%{transform:scale(1.04);opacity:.85}}
+@keyframes heart-constellation{0%,100%{transform:translate(0,8px);opacity:.35}50%{transform:translate(5px,-13px);opacity:.8}}
+.set-letter-pages{transform-origin:900px 450px;animation:letter-pages-float 13s ease-in-out infinite}
+.set-letter-moon{animation:moon-luminance 10s ease-in-out infinite}
+.set-ink-line{animation:ink-current 14s ease-in-out infinite alternate}
+@keyframes letter-pages-float{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(9px,-16px) rotate(1deg)}}
+@keyframes moon-luminance{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes ink-current{from{transform:translate(-8px,12px);opacity:.2}to{transform:translate(10px,-12px);opacity:.6}}
+[data-letter=open] .set-letter-moon{filter:drop-shadow(0 0 8px #ffe5c333)}
+.reload-section:not(.open) .pose-stage-set *,.ocean-paused .pose-stage-set *{animation-play-state:paused!important}
+
+/* HISTORIA — una cinta de recuerdos de cristal recorre el agua. */
+#overlay[data-page=historia]{--section-accent:#a5ffff}
+[data-page=historia] .section-character{top:calc(49% - 400px)}
+[data-page=historia] .section-water-shade{background:linear-gradient(90deg,#061a4a05 18%,#03164fd1 58%,#02103bf0),linear-gradient(180deg,transparent 65%,#031747a0)}
+[data-page=historia] .section-watermark{font-size:min(61vw,700px);top:1%;left:1%;-webkit-text-stroke-color:#baffff25}
+.history-chapters{position:relative;gap:9px;margin-bottom:28px}
+.history-chapters::before{content:'';position:absolute;left:27px;top:0;bottom:0;width:1px;background:linear-gradient(#91faff80,#91faff05);z-index:-1}
+.history-chapters>button{border-left:0;border-color:#9fefff25;min-height:57px;padding-left:17px;background:linear-gradient(105deg,#092a6c,#08215695);clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:translate .4s,background .3s,color .3s}
+.history-chapters>button[aria-pressed=true]{background:linear-gradient(110deg,#f1ffff,#a7f8ff);translate:9px 0;box-shadow:0 0 30px #75f1ff1c}
+.history-memory{padding:24px 25px 23px;border:1px solid #a3f7ff29;border-top:2px solid #99ffff93;background:linear-gradient(125deg,#03215cd9,#061744a6);clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%)}
+#overlay .history-memory h2{font-size:38px}
+.memory-bottom{border:0;margin-top:13px;padding-inline:3px}
+.section-eyes{position:absolute;inset:0;width:100%;height:100%;z-index:2;overflow:visible;pointer-events:none}
+.history-chapters>button{animation:history-chapter-arrive .6s cubic-bezier(.22,1,.36,1) both}
+.history-chapters>button:nth-child(2){animation-delay:.08s}
+.history-chapters>button:nth-child(3){animation-delay:.16s}
+.history-chapters>button:nth-child(4){animation-delay:.24s}
+@keyframes history-chapter-arrive{from{opacity:0;translate:-14px 5px;filter:blur(3px)}to{opacity:1;translate:0 0;filter:blur(0)}}
+.history-memory{animation:history-memory-arrive .72s .12s cubic-bezier(.22,1,.36,1) both}
+@keyframes history-memory-arrive{from{opacity:0;translate:0 12px;filter:blur(4px)}to{opacity:1;translate:0 0;filter:blur(0)}}
+.history-memory h2{text-wrap:balance}
+.history-memory .memory-kicker{color:#8cefff;letter-spacing:.16em}
+.history-chapters>button:focus-visible{outline:2px solid #9bfaff;outline-offset:3px}
+
+/* ME GUSTA — Aranza descansa dentro de una esfera de luz, no sobre un vacío. */
+[data-page=razones] .section-water-shade{background:linear-gradient(90deg,#03184bea,#053178a1 45%,#1263b912 77%),linear-gradient(0deg,#05266b55,transparent 45%)}
+[data-page=razones] .section-watermark{opacity:.6;font-size:min(66vw,780px);right:1%;top:-3%}
+.reason-selector{grid-template-columns:repeat(5,1fr);gap:9px;max-width:510px}
+.reason-selector>button{height:58px;border:1px solid #bcffff42;background:linear-gradient(135deg,#082664cf,#0e4a9a52);font-size:29px;transition:translate .3s,background .3s,box-shadow .3s}
+.reason-selector>button[aria-pressed=true]{translate:0 -5px;background:linear-gradient(135deg,#fff,#bafaff);box-shadow:0 0 30px #a7ffff33}
+.reason-feature{border-top:1px solid #b9ffff6b;border-left:0;padding:25px 30px 26px;background:linear-gradient(130deg,#042361ed,#0a3985bf);min-height:220px;box-shadow:inset 0 0 45px #48c2e90b}
+.reason-feature::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(#bcffff,#f5a7d0);opacity:.85}
+#overlay .reason-feature h2{font-size:38px}
+.reason-controls{border:0;margin-top:12px}
+
+/* CARTA — una órbita lunar y hojas suspendidas acompañan el sobre. */
+[data-page=carta] .section-character{top:calc(49% - 390px)}
+[data-page=carta] .section-water-shade{background:linear-gradient(90deg,#071a4c15,#071b51bc 51%,#080f30f0),linear-gradient(0deg,#0a143380,transparent 70%)}
+[data-page=carta] .section-watermark{-webkit-text-stroke-color:#f5d5ac1f}
+[data-page=carta] .section-transition-sheet{background:linear-gradient(105deg,transparent,#ffe4be3d 46%,#c5c7ff30 50%,transparent 54%)}
+#overlay[data-page=carta] #dialog-title{font-weight:800;letter-spacing:-.02em;color:transparent;background-image:linear-gradient(110deg,#fff9edee,#ffe0bec9),url('../nightfall_assets/agua_portada.webp');text-shadow:4px 4px 0 #31407042}
+.letter-envelope{border:1px solid #ffe7be40;box-shadow:0 22px 70px #000e3a65,0 0 50px #f8dfba0b}
+.letter-envelope::before{content:'';position:absolute;inset:-70px;z-index:-1;background:url('../nightfall_assets/marco_carta.svg') center/contain no-repeat;pointer-events:none}
+.envelope-seal::after{content:'';position:absolute;inset:-6px;border:1px solid #f5cbd16b;border-radius:50%;animation:seal-light 4s ease-in-out infinite}
+@keyframes seal-light{0%,100%{opacity:.1;scale:.9}50%{opacity:.6;scale:1.12}}
+.section-letter-paper{background:linear-gradient(135deg,#fff7ea,#ede0cd);border-top:2px solid #e9d1aa;box-shadow:0 22px 80px #010d3540}
+
+@media(min-width:1600px){[data-page=historia] .section-character{top:calc(48% - 480px)}}
+@media(max-width:1100px) and (min-width:901px){[data-page=historia] .section-character{top:calc(51% - 400px)}[data-page=carta] .section-character{top:calc(53% - 390px)}.history-memory{padding:22px}}
+@media(max-width:900px){
+  #overlay .section-topline{background:linear-gradient(#041c4ff2,#041b49d9);border-bottom-color:#a7faff2b}
+  #overlay .section-scroll{padding-top:138px}
+  #overlay #dialog-title{font-size:clamp(59px,15vw,88px);max-width:260px;text-shadow:3px 4px 0 #062963bf}
+  [data-page=historia] .section-character,[data-page=carta] .section-character{width:480px;height:480px;left:calc(83% - 240px);top:35px;opacity:1}
+  [data-page=razones] .section-character{width:400px;height:400px;left:calc(68% - 200px);top:67px;opacity:1}
+  [data-page=historia] .section-water-shade{background:linear-gradient(90deg,#04184ba0,#051a4810 85%),linear-gradient(180deg,#02184a20 32%,#03174cd9 54%,#03174cf5 74%)}
+  [data-page=razones] .section-water-shade{background:linear-gradient(90deg,#04184b99,#153c6810 80%),linear-gradient(180deg,#041a4822 30%,#042569c9 56%,#042569f2 76%)}
+  [data-page=carta] .section-water-shade{background:linear-gradient(90deg,#08163f66,#101b4110 85%),linear-gradient(180deg,#07173c15 32%,#071b4cb0 56%,#071b4cf0 80%)}
+  #overlay .section-intro{max-width:248px;padding:7px 10px;background:linear-gradient(90deg,#051b4ce8,#051b4c9c 90%,transparent);border-left:1px solid #b5faff5e;margin-left:0;margin-top:4px;font-size:10px}
+  .history-chapters{gap:9px;margin-top:26px}
+  .history-chapters>button{min-height:55px;background:linear-gradient(105deg,#06235cf5,#08245be8)}
+  .history-chapters>button[aria-pressed=true]{translate:4px 0;background:linear-gradient(110deg,#f1ffff,#a7f8ff)}
+  .history-memory{padding:22px;margin:0;min-height:168px;background:#041c50ed}
+  #overlay .history-memory h2,#overlay .reason-feature h2{font-size:32px}
+  .reason-selector{gap:7px;margin-top:27px}
+  .reason-selector>button{height:51px;font-size:26px}
+  .reason-feature{padding:24px;min-height:210px;background:linear-gradient(130deg,#042361f5,#0a3985e8)}
+  .section-letter{margin-top:35px}
+  .letter-envelope{margin-top:34px}
+  .pose-waterlight{opacity:.13;animation-duration:14s}
+  .set-memory-ribbon{animation-duration:16s}
+}
+@media(max-width:900px) and (orientation:landscape){
+  #overlay .section-scroll{padding-top:94px}
+  #overlay #dialog-title{font-size:61px}
+  [data-page=historia] .section-character,[data-page=carta] .section-character{width:490px;height:490px;left:calc(21% - 245px);top:calc(52% - 245px)}
+  [data-page=razones] .section-character{--pose-box:calc((100dvh - 105px)*1.15);width:var(--pose-box);height:var(--pose-box);left:calc(79% - var(--pose-box)/2);top:calc(35% - var(--pose-box)/2)}
+  [data-page=historia] .section-water-shade{background:linear-gradient(90deg,#04134424 20%,#031c64ee 62%,#031543f5)}
+  [data-page=razones] .section-water-shade{background:linear-gradient(90deg,#03174ff5,#032776dc 48%,#0d60b814 85%)}
+  [data-page=carta] .section-water-shade{background:linear-gradient(90deg,#08183e45,#07183fe8 57%,#071537f5)}
+}
+@media(max-width:360px){#overlay #dialog-title{font-size:58px}[data-page=razones] .section-character{left:calc(61% - 200px)}[data-page=historia] .section-character,[data-page=carta] .section-character{left:calc(84% - 240px)}.reason-selector{gap:5px}.history-memory,.reason-feature{padding:21px}}
+#overlay.reload-section #dialog-title{text-shadow:none;filter:drop-shadow(3px 4px 0 #06296399)}
+#overlay.reload-section[data-page=carta] #dialog-title{text-shadow:none;filter:drop-shadow(3px 4px 0 #25365880)}
